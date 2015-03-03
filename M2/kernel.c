@@ -1,6 +1,9 @@
 void readString(char*);
 void printString(char*);
 void printCharacter(char*);
+void readSector(char*, int);
+int div(int, int);
+int mod(int, int);
 
 // interrupt(I_NUM, AX, BX, CX, DX)
 // AX = AH*256+AL
@@ -8,10 +11,13 @@ void printCharacter(char*);
 int main() {
 	char line[80];
   // printString("Hello World"); //TASK 1
-  printString("Enter a line: "); // TASK 2
-  readString(line); // TASK 2
-  printString("Echo: "); // TASK 2
-  printString(line); // TASK 2
+  // printString("Enter a line: "); // TASK 2
+  // readString(line); // TASK 2
+  // printString("Echo: "); // TASK 2
+  // printString(line); // TASK 2
+  char buffer[512]; // TASK 3
+  readSector(buffer, 30); // TASK 3
+  printString(buffer); // TASK 3
   while(1){}
 }
 
@@ -56,4 +62,28 @@ void printString(char* string) {
     interrupt(0x10, 0xE*256+string[i], 0, 0, 0);
     i++;
   }
+}
+
+// TASK 3
+void readSector(char* buffer, int sector){
+  int relsector = mod(sector,18) + 1;
+  int head = mod(div(sector,18),2);
+  int track = div(sector,36);
+  int cx = track*256+relsector;
+  int dx = head*256;
+  interrupt(0x13, 2*256+1, buffer, cx, dx);
+}
+int div(int x, int y){
+  int count = 0;
+  while(y<x){
+    x = x-y;
+    count++;
+  }
+  return count;
+}
+int mod(int x, int y){
+  while(y<x){
+    x = x-y;
+  }
+  return x;
 }
