@@ -5,6 +5,7 @@ void printCharacter(char*);
 void readSector(char*, int);
 int div(int, int);
 int mod(int, int);
+void handleInterrupt21(int, int , int, int);
 
 // interrupt(I_NUM, AX, BX, CX, DX)
 // AX = AH*256+AL
@@ -19,9 +20,11 @@ int main() {
   // readString(line); // TASK 2
   // printString("Echo: "); // TASK 2
   // printString(line); // TASK 2
-  readSector(buffer, 30); // TASK 3
-  printString(buffer); // TASK 3
-  
+  // readSector(buffer, 30); // TASK 3
+  // printString(buffer); // TASK 3
+  makeInterrupt21(); // TASK 4
+  interrupt(0x21,0,0,0,0); // TASK 4
+
   while(1){}
 }
 
@@ -104,3 +107,7 @@ int mod(int x, int y){
 }
 
 // TASK 4
+void handleInterrupt21(int ax, int bx, int cx, int dx){
+  printString("Task 4 works!");
+}
+// TASK 5
