@@ -11,8 +11,8 @@ void handleInterrupt21(int, int , int, int);
 // AX = AH*256+AL
 
 int main() {
-	// char line[80]; // TASK 2
-  char buffer[512]; // TASK 3
+  // char line[80]; // TASK 2
+  // char buffer[512]; // TASK 3
   // printString("Hello World"); //TASK 1
   // printCharacter(0xd); // TASK 1
   // printCharacter(0xa); // TASK 1
@@ -22,8 +22,11 @@ int main() {
   // printString(line); // TASK 2
   // readSector(buffer, 30); // TASK 3
   // printString(buffer); // TASK 3
-  makeInterrupt21(); // TASK 4
-  interrupt(0x21,0,0,0,0); // TASK 4
+   char line[80]; // TASK 5
+   makeInterrupt21(); // TASK 5
+   interrupt(0x21,1,line,0,0); // TASK 5
+   interrupt(0x21,0,line,0,0); // TASK 5
+ 
 
   while(1){}
 }
@@ -106,8 +109,21 @@ int mod(int x, int y){
   return x;
 }
 
-// TASK 4
+// TASK 4/5
 void handleInterrupt21(int ax, int bx, int cx, int dx){
-  printString("Task 4 works!");
+  if(ax==0){
+  printString(bx);
+  }else{
+    if(ax==1){
+    readString(bx);
+    }else{
+      if(ax==2){
+      readSector(bx,cx);
+      }else{
+	if(ax>=3){
+	printString("ERROR INVALID AX VALUE");
+	}
+      }
+    }
+  }
 }
-// TASK 5
