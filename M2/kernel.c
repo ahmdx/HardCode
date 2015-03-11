@@ -111,19 +111,30 @@ int mod(int x, int y){
 
 // TASK 4/5
 void handleInterrupt21(int ax, int bx, int cx, int dx){
-  if(ax==0){
-  printString(bx);
-  }else{
-    if(ax==1){
-    readString(bx);
-    }else{
-      if(ax==2){
-      readSector(bx,cx);
-      }else{
-	if(ax>=3){
-	printString("ERROR INVALID AX VALUE");
-	}
-      }
-    }
+  // if(ax==0){
+  // printString(bx);
+  // }else{
+  // if(ax==1){
+  // readString(bx);
+  // }else{
+  // if(ax==2){
+  // readSector(bx,cx);
+  // }else{
+  // if(ax>=3){
+  // printString("ERROR INVALID AX VALUE");
+  // }
+  // }
+  // }
+  // }
+
+  switch (ax){
+    case 0:
+      printString(bx);break;
+    case 1:
+      readString(bx);break;
+    case 2:
+      readSector(bx,cx);break;
+    default:
+      printString("Fatal: Invalid AX value");
   }
 }
