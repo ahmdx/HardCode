@@ -133,56 +133,49 @@ void handleInterrupt21(int ax, int bx, int cx, int dx){
 
 // M2-STEP 1
 void readFile(char* fileName,char* buffer){
-  int i = 0;
+  int sectorNameCount = 0;
   int loadCount;
   char load[512];
   readSector(load,2);
-  while(i<26){ //loop 26 times to check all 26 sector names
-  int j = 0;
-  int check = 1;
-  loadCount = i*32;
-  while(j<6){ //loop on the sector name char by char
-    if(fileName[j] != load[loadCount]){
-      check = 0;
+  
+  while(sectorNameCount<16){		//loop 26 times to check all 26 sector names
+    int sectorCharCount = 0;
+    int check = 1;
+    loadCount = sectorNameCount*32;
+    while(sectorCharCount<6){ //loop on the sector name char by char
+      if(fileName[sectorCharCount] != load[loadCount]){
+	check = 0;
+      }
+      sectorCharCount++;
+      loadCount++;
     }
-    j++;
-    loadCount++;
+    if(check != 0){	//if sector name and file name are equal, break from the loop
+      break;
+    }
+    sectorNameCount++;
   }
-  if(check != 0){ //if sector name and file name are equal, break from the loop
-    break;
-  }
-  i++;
-  }
-              
 
-  if(i==0){//if looped over all sectors and name was never equal return
+  if(sectorNameCount==16){	//if looped over all sectors and name was never equal return
     return;
 
   }
   else{
-    int count = 0;
+    int fileEntryCount = 0;
     int bufferCount;
-    int loopCount;
-    //int sectorNumber;
-  while(count<26){//read all sectors into temp which is then copied into buffer
-    char temp[512];
-    //sectorNumber = (int) strtol (load[loadCount], NULL, 16);
-    readSector(temp,load[loadCount]); //load[loadCount] is a char but it should be an int
-    bufferCount = count*512; //"add 512 to the buffer address every time you call readSector"
-    loopCount = 0;
-    
-    while(loopCount<512){//copy temp to buffer
-      buffer[bufferCount]=temp[loopCount];
-      bufferCount++;
-      loopCount++;
+    int tempCount;
+    while(fileEntryCount<26){	//read all sectors into temp which is then copied into buffer
+      char temp[512];
+      readSector(temp,load[loadCount]); 	//load[loadCount] is a char but it should be an int
+      bufferCount = fileEntryCount*512; 	//"add 512 to the buffer address every time you call readSector"
+      tempCount = 0;
+      
+      while(tempCount<512){	//copy temp to buffer
+	buffer[bufferCount]=temp[tempCount];
+	bufferCount++;
+	tempCount++;
+      }
+      fileEntryCount++;
+      loadCount++;
     }
-    count++;
-    loadCount++;
   }
-  
-  
-  }
-
-  
-  
 }
