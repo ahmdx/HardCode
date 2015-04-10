@@ -1,8 +1,10 @@
+
 char readCharacter();
 void readString(char*);
 void printString(char*);
 void printCharacter(char*);
 void readSector(char*, int);
+void readFile(char*,char*);
 int div(int, int);
 int mod(int, int);
 void handleInterrupt21(int, int , int, int);
@@ -11,23 +13,27 @@ void handleInterrupt21(int, int , int, int);
 // AX = AH*256+AL
 
 int main() {
-   char line[80]; // TASK 2
+  // char line[80]; // TASK 2
   // char buffer[512]; // TASK 3
   // printString("Hello World"); //TASK 1
   // printCharacter(0xd); // TASK 1
   // printCharacter(0xa); // TASK 1
-   printString("Enter a line: "); // TASK 2
-   readString(line); // TASK 2
-   printString("Echo: "); // TASK 2
-   printString(line); // TASK 2
+  // printString("Enter a line: "); // TASK 2
+  // readString(line); // TASK 2
+  // printString("Echo: "); // TASK 2
+  // printString(line); // TASK 2
   // readSector(buffer, 30); // TASK 3
   // printString(buffer); // TASK 3
-   //char line[80]; // TASK 5
-   //makeInterrupt21(); // TASK 5
-   //interrupt(0x21,1,line,0,0); // TASK 5
-   //interrupt(0x21,0,line,0,0); // TASK 5
- 
-
+  // char line[80]; // TASK 5
+  // makeInterrupt21(); // TASK 5
+  // interrupt(0x21,1,line,0,0); // TASK 5
+  // interrupt(0x21,0,line,0,0); // TASK 5
+    char buffer[13312];
+    makeInterrupt21();
+    interrupt(0x21, 3, "messag", buffer, 0); /*read the file into buffer*/
+    interrupt(0x21, 0, buffer, 0, 0); /*print out the file*/
+//readFile("messag",buffer);
+//printString(buffer);
   while(1){}
 }
 
@@ -118,7 +124,65 @@ void handleInterrupt21(int ax, int bx, int cx, int dx){
       readString(bx);break;
     case 2:
       readSector(bx,cx);break;
+    case 3:
+      readFile(bx,cx);break;
     default:
       printString("Fatal: Invalid AX value");
   }
+}
+
+// M2-STEP 1
+void readFile(char* fileName,char* buffer){
+  int i = 26;
+  int loadCount;
+  char load[512];
+  readSector(load,2);
+  while(i>0){ //loop 26 times to check all 26 sector names
+  int j = 0;
+  int check = 1;
+  loadCount = i*32;
+  while(j<6){ //loop on the sector name char by char
+    if(fileName[j] != load[loadCount]){
+      check = 0;
+    }
+    j++;
+    loadCount++;
+  }
+  if(check != 0){ //if sector name and file name are equal, break from the loop
+    break;
+  }
+  i--;
+  }
+              
+
+  if(i==0){//if looped over all sectors and name was never equal return
+    return;
+
+  }
+  else{
+    int count = 0;
+    int bufferCount;
+    int loopCount;
+    //int sectorNumber;
+  while(count<26){//read all sectors into temp which is then copied into buffer
+    char temp[512];
+    //sectorNumber = (int) strtol (load[loadCount], NULL, 16);
+    readSector(temp,load[loadCount]); //load[loadCount] is a char but it should be an int
+    bufferCount = count*512; //"add 512 to the buffer address every time you call readSector"
+    loopCount = 0;
+    
+    while(loopCount<512){//copy temp to buffer
+      buffer[bufferCount]=temp[loopCount];
+      bufferCount++;
+      loopCount++;
+    }
+    count++;
+    loadCount++;
+  }
+  
+  
+  }
+
+  
+  
 }
