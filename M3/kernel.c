@@ -133,11 +133,11 @@ void handleInterrupt21(int ax, int bx, int cx, int dx){
 
 // M2-STEP 1
 void readFile(char* fileName,char* buffer){
-  int i = 26;
+  int i = 0;
   int loadCount;
   char load[512];
   readSector(load,2);
-  while(i>0){ //loop 26 times to check all 26 sector names
+  while(i<26){ //loop 26 times to check all 26 sector names
   int j = 0;
   int check = 1;
   loadCount = i*32;
@@ -151,7 +151,7 @@ void readFile(char* fileName,char* buffer){
   if(check != 0){ //if sector name and file name are equal, break from the loop
     break;
   }
-  i--;
+  i++;
   }
               
 
