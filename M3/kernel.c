@@ -138,7 +138,7 @@ void readFile(char* fileName,char* buffer){
   char load[512];
   readSector(load,2);
   
-  while(sectorNameCount<16){		//loop 26 times to check all 26 sector names
+  while(sectorNameCount<16){		//loop 16 times to check all 16 sector names
     int sectorCharCount = 0;
     int check = 1;
     loadCount = sectorNameCount*32;
