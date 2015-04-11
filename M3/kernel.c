@@ -34,12 +34,12 @@ int main() {
     // makeInterrupt21(); // STEP 1
     // interrupt(0x21, 3, "messag", buffer, 0); /*read the file into buffer*/ // STEP 1
     // interrupt(0x21, 0, buffer, 0, 0); /*print out the file*/ // STEP 1
-//readFile("messag",buffer);
-//printString(buffer);
-  makeInterrupt21(); // STEP 2, 3 & 4
-  // interrupt(0x21, 4, "tstprg", 0x2000, 0); // STEP 2 & 3
-  // interrupt(0x21, 5, 0, 0, 0); // STEP 3
-  interrupt(0x21, 4, "shell", 0x2000, 0); //STEP 4
+    // readFile("messag",buffer);
+    // printString(buffer);
+      makeInterrupt21(); // STEP 2, 3 & 4
+    // interrupt(0x21, 4, "tstprg", 0x2000, 0); // STEP 2 & 3
+    // interrupt(0x21, 5, 0, 0, 0); // STEP 3
+      interrupt(0x21, 4, "shell", 0x2000, 0); //STEP 4 & 5
   while(1);
 }
 
