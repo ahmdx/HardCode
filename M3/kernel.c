@@ -8,6 +8,8 @@ void readFile(char*,char*);
 int div(int, int);
 int mod(int, int);
 void handleInterrupt21(int, int , int, int);
+void executeProgram(char*, int);
+void terminate();
 
 // interrupt(I_NUM, AX, BX, CX, DX)
 // AX = AH*256+AL
@@ -28,13 +30,17 @@ int main() {
   // makeInterrupt21(); // TASK 5
   // interrupt(0x21,1,line,0,0); // TASK 5
   // interrupt(0x21,0,line,0,0); // TASK 5
-    char buffer[13312];
-    makeInterrupt21();
-    interrupt(0x21, 3, "messag", buffer, 0); /*read the file into buffer*/
-    interrupt(0x21, 0, buffer, 0, 0); /*print out the file*/
+    // char buffer[13312]; // STEP 1
+    // makeInterrupt21(); // STEP 1
+    // interrupt(0x21, 3, "messag", buffer, 0); /*read the file into buffer*/ // STEP 1
+    // interrupt(0x21, 0, buffer, 0, 0); /*print out the file*/ // STEP 1
 //readFile("messag",buffer);
 //printString(buffer);
-  while(1){}
+  makeInterrupt21(); // STEP 2
+  interrupt(0x21, 4, "tstpr2", 0x2000, 0); // STEP 2 & 3
+  // interrupt(0x21, 0, "Done", 0, 0); // STEP 2 & 3
+  interrupt(0x21, 5, 0, 0, 0); // STEP 3
+  while(1);
 }
 
 // TASK 1
@@ -126,6 +132,10 @@ void handleInterrupt21(int ax, int bx, int cx, int dx){
       readSector(bx,cx);break;
     case 3:
       readFile(bx,cx);break;
+    case 4:
+      executeProgram(bx, cx);break;
+    case 5:
+      terminate();break;
     default:
       printString("Fatal: Invalid AX value");
   }
@@ -138,24 +148,24 @@ void readFile(char* fileName,char* buffer){
   char load[512];
   readSector(load,2);
   
-  while(sectorNameCount<16){		//loop 16 times to check all 16 sector names
+  while(sectorNameCount<16){    //loop 16 times to check all 16 sector names
     int sectorCharCount = 0;
     int check = 1;
     loadCount = sectorNameCount*32;
     while(sectorCharCount<6){ //loop on the sector name char by char
       if(fileName[sectorCharCount] != load[loadCount]){
-	check = 0;
+        check = 0;
       }
       sectorCharCount++;
       loadCount++;
     }
-    if(check != 0){	//if sector name and file name are equal, break from the loop
+    if(check != 0){ //if sector name and file name are equal, break from the loop
       break;
     }
     sectorNameCount++;
   }
 
-  if(sectorNameCount==16){	//if looped over all sectors and name was never equal return
+  if(sectorNameCount==16){  //if looped over all sectors and name was never equal return
     return;
 
   }
@@ -163,19 +173,33 @@ void readFile(char* fileName,char* buffer){
     int fileEntryCount = 0;
     int bufferCount;
     int tempCount;
-    while(fileEntryCount<26){	//read all sectors into temp which is then copied into buffer
+    while(fileEntryCount<26){ //read all sectors into temp which is then copied into buffer
       char temp[512];
-      readSector(temp,load[loadCount]); 	//load[loadCount] is a char but it should be an int
-      bufferCount = fileEntryCount*512; 	//"add 512 to the buffer address every time you call readSector"
+      readSector(temp,load[loadCount]);   //load[loadCount] is a char but it should be an int
+      bufferCount = fileEntryCount*512;   //"add 512 to the buffer address every time you call readSector"
       tempCount = 0;
       
-      while(tempCount<512){	//copy temp to buffer
-	buffer[bufferCount]=temp[tempCount];
-	bufferCount++;
-	tempCount++;
+      while(tempCount<512){ //copy temp to buffer
+        buffer[bufferCount]=temp[tempCount];
+        bufferCount++;
+        tempCount++;
       }
       fileEntryCount++;
       loadCount++;
     }
   }
+}
+
+void executeProgram(char* name, int segment) {
+  char buffer[13312];
+  int i = -1;
+  readFile(name, buffer);
+  while (i++ < 13312) {
+    putInMemory(segment, 0x0000 + i, buffer[i]);
+  }
+  launchProgram(segment);
+}
+
+void terminate() {
+  while(1);
 }
