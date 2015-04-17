@@ -35,13 +35,14 @@ int main() {
    char buffer[13312]; // STEP 1
    makeInterrupt21(); // STEP 1
   // interrupt(0x21, 3, "messag", buffer, 0); /*read the file into buffer*/ // STEP 1
-  // interrupt(0x21, 0, "HELLO", 0, 0); /*print out the file*/ // STEP 1
+  // interrupt(0x21, 0, buffer, 0, 0); /*print out the file*/ // STEP 1
   // readFile("messag",buffer);
   // printString(buffer);
   // makeInterrupt21(); // STEP 2, 3 & 4
   // interrupt(0x21, 4, "tstprg", 0x2000, 0); // STEP 2 & 3
   // interrupt(0x21, 5, 0, 0, 0); // STEP 3
   // interrupt(0x21, 4, "shell", 0x2000, 0); //STEP 4 & 5
+   
    interrupt(0x21, 7, "messag", 0, 0); //delete messag
    interrupt(0x21, 3, "messag", buffer, 0); // try to read messag
    interrupt(0x21, 0, buffer, 0, 0); //print out the contents of buffer
@@ -253,9 +254,11 @@ void deleteFile(char* name){
     int fileEntryCount = 0;
     int bufferCount;
     int tempCount;
-    directory[loadCount-6] = "0x00"; // Set the first byte of the file name to 0x00.
+    directory[loadCount-6] = 0; // Set the first byte of the file name to 0x00.
     while(fileEntryCount<26){ //read all sectors into temp which is then copied into buffer
-      map[directory[loadCount]] = "0x00"; //  For each sector, set the corresponding Map byte to 0x00.
+      if(directory[loadCount] != 0){
+      map[directory[loadCount]] = 0; //  For each sector, set the corresponding Map byte to 0x00.
+      }
       fileEntryCount++;
       loadCount++;
     }
