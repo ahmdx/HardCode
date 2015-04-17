@@ -10,6 +10,8 @@ int mod(int, int);
 void handleInterrupt21(int, int , int, int);
 void executeProgram(char*, int);
 void terminate();
+void writeSector(char*, int);
+void deleteFile(char*);
 
 // interrupt(I_NUM, AX, BX, CX, DX)
 // AX = AH*256+AL
@@ -30,16 +32,19 @@ int main() {
   // makeInterrupt21(); // TASK 5
   // interrupt(0x21,1,line,0,0); // TASK 5
   // interrupt(0x21,0,line,0,0); // TASK 5
-    // char buffer[13312]; // STEP 1
-     makeInterrupt21(); // STEP 1
-     interrupt(0x21, 3, "messag", buffer, 0); /*read the file into buffer*/ // STEP 1
-     interrupt(0x21, 0, buffer, 0, 0); /*print out the file*/ // STEP 1
-    // readFile("messag",buffer);
-    // printString(buffer);
-     // makeInterrupt21(); // STEP 2, 3 & 4
-    // interrupt(0x21, 4, "tstprg", 0x2000, 0); // STEP 2 & 3
-    // interrupt(0x21, 5, 0, 0, 0); // STEP 3
-     // interrupt(0x21, 4, "shell", 0x2000, 0); //STEP 4 & 5
+   char buffer[13312]; // STEP 1
+   makeInterrupt21(); // STEP 1
+  // interrupt(0x21, 3, "messag", buffer, 0); /*read the file into buffer*/ // STEP 1
+  // interrupt(0x21, 0, "HELLO", 0, 0); /*print out the file*/ // STEP 1
+  // readFile("messag",buffer);
+  // printString(buffer);
+  // makeInterrupt21(); // STEP 2, 3 & 4
+  // interrupt(0x21, 4, "tstprg", 0x2000, 0); // STEP 2 & 3
+  // interrupt(0x21, 5, 0, 0, 0); // STEP 3
+  // interrupt(0x21, 4, "shell", 0x2000, 0); //STEP 4 & 5
+   interrupt(0x21, 7, "messag", 0, 0); //delete messag
+   interrupt(0x21, 3, "messag", buffer, 0); // try to read messag
+   interrupt(0x21, 0, buffer, 0, 0); //print out the contents of buffer
   while(1);
 }
 
@@ -136,6 +141,10 @@ void handleInterrupt21(int ax, int bx, int cx, int dx){
       executeProgram(bx, cx);break;
     case 5:
       terminate();break;
+    case 6:
+      writeSector(bx,cx);break;
+    case 7:
+      deleteFile(bx);break;
     default:
       printString("Fatal: Invalid AX value");
   }
@@ -148,7 +157,7 @@ void readFile(char* fileName,char* buffer){
   char load[512];
   readSector(load,2);
   
-  while(sectorNameCount<16){    //loop 16 times to check all 16 sector names
+  while(sectorNameCount<16){   //loop 16 times to check all 16 sector names
     int sectorCharCount = 0;
     int check = 1;
     loadCount = sectorNameCount*32;
@@ -203,4 +212,55 @@ void executeProgram(char* name, int segment) {
 void terminate() {
   // while(1);
   interrupt(0x21, 4, "shell", 0x2000, 0);
+}
+//M4-STEP 1
+void writeSector(char* buffer, int sector){
+  int relsector = mod(sector,18) + 1;
+  int head = mod(div(sector,18),2);
+  int track = div(sector,36);
+  int cx = track*256+relsector;
+  int dx = head*256;
+  interrupt(0x13, 3*256+1, buffer, cx, dx);
+}
+//M4-STEP 2
+void deleteFile(char* name){
+  char map[512];
+  char directory[512];
+  int sectorNameCount;
+  int loadCount;
+  readSector(map,1);
+  readSector(directory,2);
+  
+  while(sectorNameCount<16){   //loop 16 times to check all 16 sector names
+    int sectorCharCount = 0;
+    int check = 1;
+    loadCount = sectorNameCount*32;
+    while(sectorCharCount<6){ //loop on the sector name char by char
+      if(name[sectorCharCount] != directory[loadCount]){
+        check = 0;
+      }
+      sectorCharCount++;
+      loadCount++;
+    }
+    if(check != 0){ //if sector name and file name are equal, break from the loop
+      break;
+    }
+    sectorNameCount++;
+  }
+  if(sectorNameCount==16){  //if looped over all sectors and name was never equal return
+    return;
+  }else{
+    int fileEntryCount = 0;
+    int bufferCount;
+    int tempCount;
+    directory[loadCount-6] = "0x00"; // Set the first byte of the file name to 0x00.
+    while(fileEntryCount<26){ //read all sectors into temp which is then copied into buffer
+      map[directory[loadCount]+1] = "0x00"; //  For each sector, set the corresponding Map byte to 0x00.
+      fileEntryCount++;
+      loadCount++;
+    }
+  }
+  //Write the character arrays holding the Directory and Map back to their appropriate sectors.
+  writeSector(directory,2);
+  writeSector(map,1);
 }
