@@ -255,7 +255,7 @@ void deleteFile(char* name){
     int tempCount;
     directory[loadCount-6] = "0x00"; // Set the first byte of the file name to 0x00.
     while(fileEntryCount<26){ //read all sectors into temp which is then copied into buffer
-      map[directory[loadCount]+1] = "0x00"; //  For each sector, set the corresponding Map byte to 0x00.
+      map[directory[loadCount]] = "0x00"; //  For each sector, set the corresponding Map byte to 0x00.
       fileEntryCount++;
       loadCount++;
     }
