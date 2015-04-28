@@ -1,0 +1,4 @@
+{
+  "name":"OS",
+  "files":[{"directory":".", "recursive":1}]
+}

@@ -34,22 +34,22 @@ int main() {
   // makeInterrupt21(); // TASK 5
   // interrupt(0x21,1,line,0,0); // TASK 5
   // interrupt(0x21,0,line,0,0); // TASK 5
-   // char buffer[13312]; // STEP 1
-   // makeInterrupt21(); // STEP 1
+  // char buffer[13312]; // STEP 1
+  // makeInterrupt21(); // STEP 1
   // interrupt(0x21, 3, "messag", buffer, 0); /*read the file into buffer*/ // STEP 1
   // interrupt(0x21, 0, buffer, 0, 0); /*print out the file*/ // STEP 1
   // readFile("messag",buffer);
   // printString(buffer);
-  // makeInterrupt21(); // STEP 2, 3 & 4
+//   makeInterrupt21(); // STEP 2, 3 & 4
   // interrupt(0x21, 4, "tstprg", 0x2000, 0); // STEP 2 & 3
   // interrupt(0x21, 5, 0, 0, 0); // STEP 3
-  // interrupt(0x21, 4, "shell", 0x2000, 0); //STEP 4 & 5
-   
-   // interrupt(0x21, 7, "messag", 0, 0); //delete messag
-   // interrupt(0x21, 3, "messag", buffer, 0); // try to read messag
-   // interrupt(0x21, 0, buffer, 0, 0); //print out the contents of buffer
+//   interrupt(0x21, 4, "shell", 0x2000, 0); //STEP 4 & 5
 
-  int i=0;
+  // interrupt(0x21, 7, "messag", 0, 0); //delete messag
+  // interrupt(0x21, 3, "messag", buffer, 0); // try to read messag
+  // interrupt(0x21, 0, buffer, 0, 0); //print out the contents of buffer
+
+   int i=0;
   char buffer1[13312];
   char buffer2[13312];
   buffer2[0]='h'; buffer2[1]='e'; buffer2[2]='l'; buffer2[3]='l';
@@ -76,8 +76,8 @@ void printCharacter(char character){
 void printString(char* string) {
   int i = 0;
   while(string[i] != '\0'){
-    printCharacter(string[i]);
-    i++;
+	printCharacter(string[i]);
+	i++;
   }
 }
 
@@ -94,19 +94,19 @@ void readString(char* string) {
 
   int i = 0;
   while(letter != enter){
-    if (letter == backspace){
-      if (i > 0) {
-        printCharacter(backspace);
-        printCharacter(end);
-        printCharacter(backspace);
-        i--;
-      }
-    } else {
-      string[i] = letter;
-      printCharacter(string[i]);
-      i++;
-    }
-    letter = readCharacter();
+	if (letter == backspace){
+	  if (i > 0) {
+		printCharacter(backspace);
+		printCharacter(end);
+		printCharacter(backspace);
+		i--;
+	  }
+	} else {
+	  string[i] = letter;
+	  printCharacter(string[i]);
+	  i++;
+	}
+	letter = readCharacter();
   }
   string[i] = carriageReturn;
   string[++i] = linefeed;
@@ -132,15 +132,15 @@ void readSector(char* buffer, int sector){
 int div(int x, int y){
   int count = 0;
   while(y<x){
-    x = x-y;
-    count++;
+	x = x-y;
+	count++;
   }
   return count;
 }
 
 int mod(int x, int y){
   while(y<x){
-    x = x-y;
+	x = x-y;
   }
   return x;
 }
@@ -148,26 +148,26 @@ int mod(int x, int y){
 // TASK 4/5
 void handleInterrupt21(int ax, int bx, int cx, int dx){
   switch (ax){
-    case 0:
-      printString(bx);break;
-    case 1:
-      readString(bx);break;
-    case 2:
-      readSector(bx,cx);break;
-    case 3:
-      readFile(bx,cx);break;
-    case 4:
-      executeProgram(bx, cx);break;
-    case 5:
-      terminate();break;
-    case 6:
-      writeSector(bx,cx);break;
-    case 7:
-      deleteFile(bx);break;
-    case 8:
-      writeFile(bx, cx, dx);break;
-    default:
-      printString("Fatal: Invalid AX value");
+	case 0:
+	  printString(bx);break;
+	case 1:
+	  readString(bx);break;
+	case 2:
+	  readSector(bx,cx);break;
+	case 3:
+	  readFile(bx,cx);break;
+	case 4:
+	  executeProgram(bx, cx);break;
+	case 5:
+	  terminate();break;
+	case 6:
+	  writeSector(bx,cx);break;
+	case 7:
+	  deleteFile(bx);break;
+	case 8:
+	  writeFile(bx, cx, dx);break;
+	default:
+	  printString("Fatal: Invalid AX value");
   }
 }
 
@@ -177,46 +177,46 @@ void readFile(char* fileName,char* buffer){
   int loadCount;
   char load[512];
   readSector(load,2);
-  
+
   while(sectorNameCount<16){   //loop 16 times to check all 16 sector names
-    int sectorCharCount = 0;
-    int check = 1;
-    loadCount = sectorNameCount*32;
-    while(sectorCharCount<6){ //loop on the sector name char by char
-      if(fileName[sectorCharCount] != load[loadCount]){
-        check = 0;
-      }
-      sectorCharCount++;
-      loadCount++;
-    }
-    if(check != 0){ //if sector name and file name are equal, break from the loop
-      break;
-    }
-    sectorNameCount++;
+	int sectorCharCount = 0;
+	int check = 1;
+	loadCount = sectorNameCount*32;
+	while(sectorCharCount<6){ //loop on the sector name char by char
+	  if(fileName[sectorCharCount] != load[loadCount]){
+		check = 0;
+	  }
+	  sectorCharCount++;
+	  loadCount++;
+	}
+	if(check != 0){ //if sector name and file name are equal, break from the loop
+	  break;
+	}
+	sectorNameCount++;
   }
 
   if(sectorNameCount==16){  //if looped over all sectors and name was never equal return
-    return;
+	return;
 
   }
   else{
-    int fileEntryCount = 0;
-    int bufferCount;
-    int tempCount;
-    while(fileEntryCount<26){ //read all sectors into temp which is then copied into buffer
-      char temp[512];
-      readSector(temp,load[loadCount]);   //load[loadCount] is a char but it should be an int
-      bufferCount = fileEntryCount*512;   //"add 512 to the buffer address every time you call readSector"
-      tempCount = 0;
-      
-      while(tempCount<512){ //copy temp to buffer
-        buffer[bufferCount]=temp[tempCount];
-        bufferCount++;
-        tempCount++;
-      }
-      fileEntryCount++;
-      loadCount++;
-    }
+	int fileEntryCount = 0;
+	int bufferCount;
+	int tempCount;
+	while(fileEntryCount<26){ //read all sectors into temp which is then copied into buffer
+	  char temp[512];
+	  readSector(temp,load[loadCount]);   //load[loadCount] is a char but it should be an int
+	  bufferCount = fileEntryCount*512;   //"add 512 to the buffer address every time you call readSector"
+	  tempCount = 0;
+
+	  while(tempCount<512){ //copy temp to buffer
+		buffer[bufferCount]=temp[tempCount];
+		bufferCount++;
+		tempCount++;
+	  }
+	  fileEntryCount++;
+	  loadCount++;
+	}
   }
 }
 // M3-STEP 2
@@ -225,7 +225,7 @@ void executeProgram(char* name, int segment) {
   int i = -1;
   readFile(name, buffer);
   while (i++ < 13312) {
-    putInMemory(segment, 0x0000 + i, buffer[i]);
+	putInMemory(segment, 0x0000 + i, buffer[i]);
   }
   launchProgram(segment);
 }
@@ -247,41 +247,41 @@ void writeSector(char* buffer, int sector){
 void deleteFile(char* name){
   char map[512];
   char directory[512];
-  int sectorNameCount;
+  int sectorNameCount = 0;
   int loadCount;
   readSector(map,1);
   readSector(directory,2);
-  
+
   while(sectorNameCount<16){   //loop 16 times to check all 16 sector names
-    int sectorCharCount = 0;
-    int check = 1;
-    loadCount = sectorNameCount*32;
-    while(sectorCharCount<6){ //loop on the sector name char by char
-      if(name[sectorCharCount] != directory[loadCount]){
-        check = 0;
-      }
-      sectorCharCount++;
-      loadCount++;
-    }
-    if(check != 0){ //if sector name and file name are equal, break from the loop
-      break;
-    }
-    sectorNameCount++;
+	int sectorCharCount = 0;
+	int check = 1;
+	loadCount = sectorNameCount*32;
+	while(sectorCharCount<6){ //loop on the sector name char by char
+	  if(name[sectorCharCount] != directory[loadCount]){
+		check = 0;
+	  }
+	  sectorCharCount++;
+	  loadCount++;
+	}
+	if(check != 0){ //if sector name and file name are equal, break from the loop
+	  break;
+	}
+	sectorNameCount++;
   }
   if(sectorNameCount==16){  //if looped over all sectors and name was never equal return
-    return;
+	return;
   }else{
-    int fileEntryCount = 0;
-    int bufferCount;
-    int tempCount;
-    directory[loadCount-6] = 0; // Set the first byte of the file name to 0x00.
-    while(fileEntryCount<26){ //read all sectors into temp which is then copied into buffer
-      if(directory[loadCount] != 0){
-      map[directory[loadCount]] = 0; //  For each sector, set the corresponding Map byte to 0x00.
-      }
-      fileEntryCount++;
-      loadCount++;
-    }
+	int fileEntryCount = 0;
+	int bufferCount;
+	int tempCount;
+	directory[loadCount-6] = 0; // Set the first byte of the file name to 0x00.
+	while(fileEntryCount<26){ //read all sectors into temp which is then copied into buffer
+	  if(directory[loadCount] != 0){
+		map[directory[loadCount]] = 0; //  For each sector, set the corresponding Map byte to 0x00.
+	  }
+	  fileEntryCount++;
+	  loadCount++;
+	}
   }
   //Write the character arrays holding the Directory and Map back to their appropriate sectors.
   writeSector(directory,2);
@@ -299,59 +299,61 @@ void writeFile(char* name, char* buffer, int secNum) {
   int dirEntry = 6;
   int secCounter = 0;
   int nameIndex = 0;
+  int bufferSize = 0;
+  int sectors = 0;
   readSector(map, 1);
   readSector(directory, 2);
   while(dirIndex < 512) {
-    if (directory[dirIndex] == 0x00) {
-      break;
-    }
-    dirIndex += 32;
+	if (directory[dirIndex] == 0x00) {
+	  break;
+	}
+	dirIndex += 32;
   }
   if (dirIndex >= 512) {
-    printString("Error: No free directory available.");
-    return;
+	printString("Error: No free directory available.");
+	return;
   }
-  while (nameIndex < 6) {
-    if (name[nameIndex] != '\0') {
-      directory[dirIndex] = name[nameIndex];
-    } else {
-      directory[dirIndex] = 0x00;
-    }
-    nameIndex++;
+  while (name[nameIndex] != '\0') {
+	directory[dirIndex] = name[nameIndex];
+	nameIndex++;
+	dirIndex++;
   }
-  while(secCounter < secNum) {
-    while(mapIndex < 512) {
-      if (map[mapIndex] == 0x00) {
-        map[mapIndex] = 0xFF;
-        directory[dirEntry] = '0' + mapIndex;
-        dirEntry++;
-        while (tempIndex < 512) {
-          temp[tempIndex] = buffer[bufferIndex];
-          tempIndex++;
-          bufferIndex++;
-        }
-        tempIndex = 0;
-        // bufferIndex++;
-        writeSector(temp, mapIndex);
-        break;
-      }
-      mapIndex++;
-    }
-    secCounter++;
+  if (nameIndex < 6) {
+	while (nameIndex < 6) {
+	  directory[dirIndex] = 0x00;
+	  dirIndex++;
+	  nameIndex++;
+	}
   }
-  while (dirEntry < 32) {
-    directory[dirEntry] = 0x00;
-    dirEntry++;
+  while(buffer[bufferSize] != 0x00) {
+	bufferSize++;
   }
-  writeSector(map, 1);
-  writeSector(directory, 2);
-}
 
-int length(char* array) {
-  int i = -1;
-  int l = 0;
-  while (array[++i] != '\0') {
-    l++;
+  sectors = div(bufferSize, 512);
+  if (mod(bufferSize, 512) != 0) {
+	sectors++;
   }
-  return l;
+
+  while(secCounter < sectors) {
+	mapIndex = 0;
+	while(mapIndex < 512) {
+	  if (map[mapIndex] == 0x00) {
+		map[mapIndex] = 0xFF;
+		directory[dirIndex] = mapIndex + 1;
+		dirEntry++;
+		while (tempIndex < 512) {
+		  temp[tempIndex] = buffer[bufferIndex];
+		  tempIndex++;
+		  bufferIndex++;
+		}
+		tempIndex = 0;
+		writeSector(temp, mapIndex + 1);
+		break;
+	  }
+	  mapIndex++;
+	}
+	secCounter++;
+	writeSector(map, 1);
+	writeSector(directory, 2);
+  }
 }
