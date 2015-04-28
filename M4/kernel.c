@@ -12,6 +12,8 @@ void executeProgram(char*, int);
 void terminate();
 void writeSector(char*, int);
 void deleteFile(char*);
+void writeFile(char* name, char* buffer, int secNum);
+int length(char* array);
 
 // interrupt(I_NUM, AX, BX, CX, DX)
 // AX = AH*256+AL
@@ -32,8 +34,8 @@ int main() {
   // makeInterrupt21(); // TASK 5
   // interrupt(0x21,1,line,0,0); // TASK 5
   // interrupt(0x21,0,line,0,0); // TASK 5
-   char buffer[13312]; // STEP 1
-   makeInterrupt21(); // STEP 1
+   // char buffer[13312]; // STEP 1
+   // makeInterrupt21(); // STEP 1
   // interrupt(0x21, 3, "messag", buffer, 0); /*read the file into buffer*/ // STEP 1
   // interrupt(0x21, 0, buffer, 0, 0); /*print out the file*/ // STEP 1
   // readFile("messag",buffer);
@@ -43,9 +45,25 @@ int main() {
   // interrupt(0x21, 5, 0, 0, 0); // STEP 3
   // interrupt(0x21, 4, "shell", 0x2000, 0); //STEP 4 & 5
    
-   interrupt(0x21, 7, "messag", 0, 0); //delete messag
-   interrupt(0x21, 3, "messag", buffer, 0); // try to read messag
-   interrupt(0x21, 0, buffer, 0, 0); //print out the contents of buffer
+   // interrupt(0x21, 7, "messag", 0, 0); //delete messag
+   // interrupt(0x21, 3, "messag", buffer, 0); // try to read messag
+   // interrupt(0x21, 0, buffer, 0, 0); //print out the contents of buffer
+
+  int i=0;
+  char buffer1[13312];
+  char buffer2[13312];
+  buffer2[0]='h'; buffer2[1]='e'; buffer2[2]='l'; buffer2[3]='l';
+  buffer2[4]='o';
+  for(i=5; i<13312; i++) buffer2[i]=0x0;
+  makeInterrupt21();
+  interrupt(0x21,8, "testW\0", buffer2, 1); //write file testW
+  interrupt(0x21,3, "testW\0", buffer1, 0); //read file testW
+  interrupt(0x21,0, buffer1, 0, 0); // print out contents of testW
+  // char one[3];
+  // one[0] = '0';
+  // one[1] = '1';
+  // one[2] = 0x00;
+  // printString(one);
   while(1);
 }
 
@@ -146,6 +164,8 @@ void handleInterrupt21(int ax, int bx, int cx, int dx){
       writeSector(bx,cx);break;
     case 7:
       deleteFile(bx);break;
+    case 8:
+      writeFile(bx, cx, dx);break;
     default:
       printString("Fatal: Invalid AX value");
   }
@@ -266,4 +286,72 @@ void deleteFile(char* name){
   //Write the character arrays holding the Directory and Map back to their appropriate sectors.
   writeSector(directory,2);
   writeSector(map,1);
+}
+
+void writeFile(char* name, char* buffer, int secNum) {
+  char map[512];
+  char directory[512];
+  char temp[512];
+  int mapIndex = 0;
+  int dirIndex = 0;
+  int bufferIndex = 0;
+  int tempIndex = 0;
+  int dirEntry = 6;
+  int secCounter = 0;
+  int nameIndex = 0;
+  readSector(map, 1);
+  readSector(directory, 2);
+  while(dirIndex < 512) {
+    if (directory[dirIndex] == 0x00) {
+      break;
+    }
+    dirIndex += 32;
+  }
+  if (dirIndex >= 512) {
+    printString("Error: No free directory available.");
+    return;
+  }
+  while (nameIndex < 6) {
+    if (name[nameIndex] != '\0') {
+      directory[dirIndex] = name[nameIndex];
+    } else {
+      directory[dirIndex] = 0x00;
+    }
+    nameIndex++;
+  }
+  while(secCounter < secNum) {
+    while(mapIndex < 512) {
+      if (map[mapIndex] == 0x00) {
+        map[mapIndex] = 0xFF;
+        directory[dirEntry] = '0' + mapIndex;
+        dirEntry++;
+        while (tempIndex < 512) {
+          temp[tempIndex] = buffer[bufferIndex];
+          tempIndex++;
+          bufferIndex++;
+        }
+        tempIndex = 0;
+        // bufferIndex++;
+        writeSector(temp, mapIndex);
+        break;
+      }
+      mapIndex++;
+    }
+    secCounter++;
+  }
+  while (dirEntry < 32) {
+    directory[dirEntry] = 0x00;
+    dirEntry++;
+  }
+  writeSector(map, 1);
+  writeSector(directory, 2);
+}
+
+int length(char* array) {
+  int i = -1;
+  int l = 0;
+  while (array[++i] != '\0') {
+    l++;
+  }
+  return l;
 }
