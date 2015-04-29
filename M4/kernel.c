@@ -40,16 +40,16 @@ int main() {
   // interrupt(0x21, 0, buffer, 0, 0); /*print out the file*/ // STEP 1
   // readFile("messag",buffer);
   // printString(buffer);
-//   makeInterrupt21(); // STEP 2, 3 & 4
+  //   makeInterrupt21(); // STEP 2, 3 & 4
   // interrupt(0x21, 4, "tstprg", 0x2000, 0); // STEP 2 & 3
   // interrupt(0x21, 5, 0, 0, 0); // STEP 3
-//   interrupt(0x21, 4, "shell", 0x2000, 0); //STEP 4 & 5
+  //   interrupt(0x21, 4, "shell", 0x2000, 0); //STEP 4 & 5
 
   // interrupt(0x21, 7, "messag", 0, 0); //delete messag
   // interrupt(0x21, 3, "messag", buffer, 0); // try to read messag
   // interrupt(0x21, 0, buffer, 0, 0); //print out the contents of buffer
 
-   int i=0;
+  int i=0;
   char buffer1[13312];
   char buffer2[13312];
   buffer2[0]='h'; buffer2[1]='e'; buffer2[2]='l'; buffer2[3]='l';
@@ -296,7 +296,6 @@ void writeFile(char* name, char* buffer, int secNum) {
   int dirIndex = 0;
   int bufferIndex = 0;
   int tempIndex = 0;
-  int dirEntry = 6;
   int secCounter = 0;
   int nameIndex = 0;
   int bufferSize = 0;
@@ -340,7 +339,7 @@ void writeFile(char* name, char* buffer, int secNum) {
 	  if (map[mapIndex] == 0x00) {
 		map[mapIndex] = 0xFF;
 		directory[dirIndex] = mapIndex + 1;
-		dirEntry++;
+		dirIndex++;
 		while (tempIndex < 512) {
 		  temp[tempIndex] = buffer[bufferIndex];
 		  tempIndex++;
