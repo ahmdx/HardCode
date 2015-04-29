@@ -2,15 +2,20 @@ void handleCommand(char*);
 
 int main() {
   char line[100];
-  while(1) {
-	// makeInterrupt21();
-	interrupt(0x21, 0, "shell$ ", 0, 0);
-	interrupt(0x21, 1, line, 0, 0);
-	handleCommand(line);
-  }
+  //while(1) {
+  // makeInterrupt21();
+  interrupt(0x21, 0, "shell$ ", 0, 0);
+  interrupt(0x21, 1, line, 0, 0);
+  handleCommand(line);
+  interrupt(0x21, 5, 0, 0, 0);
+  //}
 }
 
 void handleCommand(char* input) {
+  char directory[512];
+  char dirName[9];
+  int dirIndex = 0;
+  int dirEntry = 0;
   //   int i = 0;
   //   int comm = 0;
   //   char* view = "view";
@@ -29,7 +34,21 @@ void handleCommand(char* input) {
   } else if (input[0] == 'c' && input[1] == 'o' && input[2] == 'p' && input[3] == 'y') {
 	interrupt(0x21, 0, "copy", 0, 0);
   } else if (input[0] == 'd' && input[1] == 'i' && input[2] == 'r') {
-	interrupt(0x21, 0, "dir", 0, 0);
+	interrupt(0x21, 2, directory, 2, 0);
+	while (dirIndex < 16) {
+	  if (directory[dirIndex*32] != 0x00) {
+		dirEntry = 0;
+		while(dirEntry < 6) {
+		  dirName[dirEntry] = directory[dirIndex*32 + dirEntry];
+		  dirEntry++;
+		}
+		dirName[dirEntry] = '\r';
+		dirName[dirEntry + 1] = '\n';
+		interrupt(0x21, 0, dirName, 0, 0);s
+	  }
+	  dirIndex++;
+	}
+	//   readSector(directory, 2);
   } else if (input[0] == 'c' && input[1] == 'r' && input[2] == 'e' && input[3] == 'a' && input[4] == 't' && input[5] == 'e') {
 	interrupt(0x21, 0, "create", 0, 0);
   } else {
