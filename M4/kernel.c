@@ -43,6 +43,7 @@ int main() {
   makeInterrupt21(); // STEP 2, 3 & 4
   // interrupt(0x21, 4, "tstprg", 0x2000, 0); // STEP 2 & 3
   // interrupt(0x21, 5, 0, 0, 0); // STEP 3
+  //copy("copy messag huhuhu");
   interrupt(0x21, 4, "shell", 0x2000, 0); //STEP 4 & 5
   
   // interrupt(0x21, 7, "messag", 0, 0); //delete messag
@@ -226,7 +227,7 @@ void executeProgram(char* name, int segment) {
   char buffer[13312];
   int i = -1;
   readFile(name, buffer);
-  while (i++ < 13312) {
+  while (++i < 13312) {
     putInMemory(segment, 0x0000 + i, buffer[i]);
   }
   launchProgram(segment);
@@ -363,38 +364,42 @@ void writeFile(char* name, char* buffer, int secNum) {
 void copy(char* input){
   int c =0;
   int cc =0;
+  int j = 0;
   char filename1[7];
-  char filename2[7];
   int copycheck = 0;
   char copyBuffer[13312];
   
-  while(c<6){
+  while(c<7){
     if(input[c+5] == 0x20){
       break;
     }
     filename1[c] = input[c+5];
     c++;
   }
-  filename1[c] = "\0";
-  //readFile(filename1,copyBuffer);
+  //filename1[c] = "\0";
+  readFile(filename1,copyBuffer);
   if(c < 6){
     c++;
   }
-  while(cc<6){
+  
+//   while(j<7){
+//     filename1[j] = "0x00";
+//     j++;
+//   }
+  while(cc<7){
     if(input[c+5] == "\0"){
       break;
     }
-    filename2[cc] = input[c+5];
+    filename1[cc] = input[c+5];
     
     cc++;
     c++;
   }
-  filename2[cc] = "\0";
-  readFile(filename1,copyBuffer);
-  printString(copyBuffer);
-  writeFile(filename2,copyBuffer,0);
+  //filename1[cc] = "\0";
   
-  //printString(input);
-  // printString(filename1);
-  // printString(filename2);
+  //printString(copyBuffer);
+  writeFile(filename1,copyBuffer,0);
+  printString(input);
+   printString(filename1);
+   //printString(filename2);
 }

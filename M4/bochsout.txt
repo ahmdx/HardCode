@@ -33,37 +33,37 @@
 00000000000i[     ]   SB16 support: yes
 00000000000i[     ]   USB support: yes
 00000000000i[     ]   VGA extension support: vbe cirrus
-00000000000i[MEM0 ] allocated memory at 0x7fda785da010. after alignment, vector=0x7fda785db000
+00000000000i[MEM0 ] allocated memory at 0x7f0029d38010. after alignment, vector=0x7f0029d39000
 00000000000i[MEM0 ] 32.00MB
 00000000000i[MEM0 ] mem block size = 0x00100000, blocks=32
 00000000000i[MEM0 ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
-00000000000i[     ] lt_dlhandle is 0x3b95d30
+00000000000i[     ] lt_dlhandle is 0x3425d30
 00000000000i[PLGIN] loaded plugin libbx_hdimage.so
-00000000000i[     ] lt_dlhandle is 0x3b966a0
+00000000000i[     ] lt_dlhandle is 0x34266a0
 00000000000i[PLGIN] loaded plugin libbx_pci.so
-00000000000i[     ] lt_dlhandle is 0x3b97250
+00000000000i[     ] lt_dlhandle is 0x3427250
 00000000000i[PLGIN] loaded plugin libbx_pci2isa.so
-00000000000i[     ] lt_dlhandle is 0x3b97c40
+00000000000i[     ] lt_dlhandle is 0x3427c40
 00000000000i[PLGIN] loaded plugin libbx_acpi.so
-00000000000i[     ] lt_dlhandle is 0x3b98680
+00000000000i[     ] lt_dlhandle is 0x3428680
 00000000000i[PLGIN] loaded plugin libbx_cmos.so
-00000000000i[     ] lt_dlhandle is 0x3b98fc0
+00000000000i[     ] lt_dlhandle is 0x3428fc0
 00000000000i[PLGIN] loaded plugin libbx_dma.so
-00000000000i[     ] lt_dlhandle is 0x3b99a50
+00000000000i[     ] lt_dlhandle is 0x3429a50
 00000000000i[PLGIN] loaded plugin libbx_pic.so
-00000000000i[     ] lt_dlhandle is 0x3b9a2f0
+00000000000i[     ] lt_dlhandle is 0x342a2f0
 00000000000i[PLGIN] loaded plugin libbx_pit.so
-00000000000i[     ] lt_dlhandle is 0x3b9ad20
+00000000000i[     ] lt_dlhandle is 0x342ad20
 00000000000i[PLGIN] loaded plugin libbx_floppy.so
-00000000000i[     ] lt_dlhandle is 0x3b9b910
+00000000000i[     ] lt_dlhandle is 0x342b910
 00000000000i[PLGIN] loaded plugin libbx_vga.so
-00000000000i[     ] lt_dlhandle is 0x3b9c0a0
+00000000000i[     ] lt_dlhandle is 0x342c0a0
 00000000000i[PLGIN] loaded plugin libbx_ioapic.so
-00000000000i[     ] lt_dlhandle is 0x3b9cae0
+00000000000i[     ] lt_dlhandle is 0x342cae0
 00000000000i[PLGIN] loaded plugin libbx_keyboard.so
-00000000000i[     ] lt_dlhandle is 0x3b9d380
+00000000000i[     ] lt_dlhandle is 0x342d380
 00000000000i[PLGIN] loaded plugin libbx_harddrv.so
-00000000000i[     ] lt_dlhandle is 0x3baf470
+00000000000i[     ] lt_dlhandle is 0x343f470
 00000000000i[PLGIN] loaded plugin libbx_pci_ide.so
 00000000000i[PLGIN] init_dev of 'pci' plugin device by virtual method
 00000000000i[PCI  ] 440FX Host bridge present at device 0, function 0
@@ -71,7 +71,7 @@
 00000000000i[PCI  ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS ] Using local time for initial clock
-00000000000i[CMOS ] Setting initial clock to: Wed Apr 29 22:29:37 2015 (time0=1430335777)
+00000000000i[CMOS ] Setting initial clock to: Wed Apr 29 23:47:25 2015 (time0=1430340445)
 00000000000i[PLGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA  ] channel 4 used by cascade
 00000000000i[PLGIN] init_dev of 'pic' plugin device by virtual method
@@ -210,138 +210,23 @@
 00001594488i[BXVGA] VBE known Display Interface b0c5
 00001597413i[VBIOS] VBE Bios $Id: vbe.c,v 1.64 2011/07/19 18:25:05 vruppert Exp $
 00032315171i[BIOS ] Booting from 0000:7c00
-00033783207i[FDD  ] attempt to read/write sector 19 past last sector 18
-00038415967i[FDD  ] attempt to read/write sector 19 past last sector 18
-00043048731i[FDD  ] attempt to read/write sector 19 past last sector 18
-00047681491i[FDD  ] attempt to read/write sector 19 past last sector 18
-00052314255i[FDD  ] attempt to read/write sector 19 past last sector 18
-00056947015i[FDD  ] attempt to read/write sector 19 past last sector 18
-00061579779i[FDD  ] attempt to read/write sector 19 past last sector 18
-00066212550i[FDD  ] attempt to read/write sector 19 past last sector 18
-00070845310i[FDD  ] attempt to read/write sector 19 past last sector 18
-00075478085i[FDD  ] attempt to read/write sector 19 past last sector 18
-00080110845i[FDD  ] attempt to read/write sector 19 past last sector 18
-00084743609i[FDD  ] attempt to read/write sector 19 past last sector 18
-00089376369i[FDD  ] attempt to read/write sector 19 past last sector 18
-00094009133i[FDD  ] attempt to read/write sector 19 past last sector 18
-00098641904i[FDD  ] attempt to read/write sector 19 past last sector 18
-00103274664i[FDD  ] attempt to read/write sector 19 past last sector 18
-00107907461i[FDD  ] attempt to read/write sector 19 past last sector 18
-00112540221i[FDD  ] attempt to read/write sector 19 past last sector 18
-00117172985i[FDD  ] attempt to read/write sector 19 past last sector 18
-00121805745i[FDD  ] attempt to read/write sector 19 past last sector 18
-00126438509i[FDD  ] attempt to read/write sector 19 past last sector 18
-00131071280i[FDD  ] attempt to read/write sector 19 past last sector 18
-00135704044i[FDD  ] attempt to read/write sector 19 past last sector 18
-00140336815i[FDD  ] attempt to read/write sector 19 past last sector 18
-00144969575i[FDD  ] attempt to read/write sector 19 past last sector 18
-00149602339i[FDD  ] attempt to read/write sector 19 past last sector 18
-00154235099i[FDD  ] attempt to read/write sector 19 past last sector 18
-00158867863i[FDD  ] attempt to read/write sector 19 past last sector 18
-00163500623i[FDD  ] attempt to read/write sector 19 past last sector 18
-00168133387i[FDD  ] attempt to read/write sector 19 past last sector 18
-00172766158i[FDD  ] attempt to read/write sector 19 past last sector 18
-00177398918i[FDD  ] attempt to read/write sector 19 past last sector 18
-00182031693i[FDD  ] attempt to read/write sector 19 past last sector 18
-00186664453i[FDD  ] attempt to read/write sector 19 past last sector 18
-00191297217i[FDD  ] attempt to read/write sector 19 past last sector 18
-00195929977i[FDD  ] attempt to read/write sector 19 past last sector 18
-00200562741i[FDD  ] attempt to read/write sector 19 past last sector 18
-00205195512i[FDD  ] attempt to read/write sector 19 past last sector 18
-00209828272i[FDD  ] attempt to read/write sector 19 past last sector 18
-00214461069i[FDD  ] attempt to read/write sector 19 past last sector 18
-00219093829i[FDD  ] attempt to read/write sector 19 past last sector 18
-00223726593i[FDD  ] attempt to read/write sector 19 past last sector 18
-00228359353i[FDD  ] attempt to read/write sector 19 past last sector 18
-00232992117i[FDD  ] attempt to read/write sector 19 past last sector 18
-00237624888i[FDD  ] attempt to read/write sector 19 past last sector 18
-00242257652i[FDD  ] attempt to read/write sector 19 past last sector 18
-00246890423i[FDD  ] attempt to read/write sector 19 past last sector 18
-00251523183i[FDD  ] attempt to read/write sector 19 past last sector 18
-00256155947i[FDD  ] attempt to read/write sector 19 past last sector 18
-00260788707i[FDD  ] attempt to read/write sector 19 past last sector 18
-00265421471i[FDD  ] attempt to read/write sector 19 past last sector 18
-00270054231i[FDD  ] attempt to read/write sector 19 past last sector 18
-00274686995i[FDD  ] attempt to read/write sector 19 past last sector 18
-00279319766i[FDD  ] attempt to read/write sector 19 past last sector 18
-00283952526i[FDD  ] attempt to read/write sector 19 past last sector 18
-00288585301i[FDD  ] attempt to read/write sector 19 past last sector 18
-00293218061i[FDD  ] attempt to read/write sector 19 past last sector 18
-00297850825i[FDD  ] attempt to read/write sector 19 past last sector 18
-00302483585i[FDD  ] attempt to read/write sector 19 past last sector 18
-00307116349i[FDD  ] attempt to read/write sector 19 past last sector 18
-00311749120i[FDD  ] attempt to read/write sector 19 past last sector 18
-00316381880i[FDD  ] attempt to read/write sector 19 past last sector 18
-00321014677i[FDD  ] attempt to read/write sector 19 past last sector 18
-00325647437i[FDD  ] attempt to read/write sector 19 past last sector 18
-00330280201i[FDD  ] attempt to read/write sector 19 past last sector 18
-00334912961i[FDD  ] attempt to read/write sector 19 past last sector 18
-00339545725i[FDD  ] attempt to read/write sector 19 past last sector 18
-00344178496i[FDD  ] attempt to read/write sector 19 past last sector 18
-00348811260i[FDD  ] attempt to read/write sector 19 past last sector 18
-00353444031i[FDD  ] attempt to read/write sector 19 past last sector 18
-00358076791i[FDD  ] attempt to read/write sector 19 past last sector 18
-00362709555i[FDD  ] attempt to read/write sector 19 past last sector 18
-00367342315i[FDD  ] attempt to read/write sector 19 past last sector 18
-00371975079i[FDD  ] attempt to read/write sector 19 past last sector 18
-00376607839i[FDD  ] attempt to read/write sector 19 past last sector 18
-00381240603i[FDD  ] attempt to read/write sector 19 past last sector 18
-00385873374i[FDD  ] attempt to read/write sector 19 past last sector 18
-00390506134i[FDD  ] attempt to read/write sector 19 past last sector 18
-00395138909i[FDD  ] attempt to read/write sector 19 past last sector 18
-00399771669i[FDD  ] attempt to read/write sector 19 past last sector 18
-00404404433i[FDD  ] attempt to read/write sector 19 past last sector 18
-00409037193i[FDD  ] attempt to read/write sector 19 past last sector 18
-00413669957i[FDD  ] attempt to read/write sector 19 past last sector 18
-00418302728i[FDD  ] attempt to read/write sector 19 past last sector 18
-00422935488i[FDD  ] attempt to read/write sector 19 past last sector 18
-00427568285i[FDD  ] attempt to read/write sector 19 past last sector 18
-00432201045i[FDD  ] attempt to read/write sector 19 past last sector 18
-00436833809i[FDD  ] attempt to read/write sector 19 past last sector 18
-00441466569i[FDD  ] attempt to read/write sector 19 past last sector 18
-00446099333i[FDD  ] attempt to read/write sector 19 past last sector 18
-00450732104i[FDD  ] attempt to read/write sector 19 past last sector 18
-00455364868i[FDD  ] attempt to read/write sector 19 past last sector 18
-00459997639i[FDD  ] attempt to read/write sector 19 past last sector 18
-00464630399i[FDD  ] attempt to read/write sector 19 past last sector 18
-00469263163i[FDD  ] attempt to read/write sector 19 past last sector 18
-00473895923i[FDD  ] attempt to read/write sector 19 past last sector 18
-00478528687i[FDD  ] attempt to read/write sector 19 past last sector 18
-00483161447i[FDD  ] attempt to read/write sector 19 past last sector 18
-00487794211i[FDD  ] attempt to read/write sector 19 past last sector 18
-00492426982i[FDD  ] attempt to read/write sector 19 past last sector 18
-00497059742i[FDD  ] attempt to read/write sector 19 past last sector 18
-00501692517i[FDD  ] attempt to read/write sector 19 past last sector 18
-00506325277i[FDD  ] attempt to read/write sector 19 past last sector 18
-00510958041i[FDD  ] attempt to read/write sector 19 past last sector 18
-00515590801i[FDD  ] attempt to read/write sector 19 past last sector 18
-00520223565i[FDD  ] attempt to read/write sector 19 past last sector 18
-00524856336i[FDD  ] attempt to read/write sector 19 past last sector 18
-00529489096i[FDD  ] attempt to read/write sector 19 past last sector 18
-00534121893i[FDD  ] attempt to read/write sector 19 past last sector 18
-00538754653i[FDD  ] attempt to read/write sector 19 past last sector 18
-00543387417i[FDD  ] attempt to read/write sector 19 past last sector 18
-00548020177i[FDD  ] attempt to read/write sector 19 past last sector 18
-00552652941i[FDD  ] attempt to read/write sector 19 past last sector 18
-00557285712i[FDD  ] attempt to read/write sector 19 past last sector 18
-00561918476i[FDD  ] attempt to read/write sector 19 past last sector 18
-00564870000p[SDL  ] >>PANIC<< User requested shutdown.
-00564870000i[CPU0 ] CPU is in real mode (active)
-00564870000i[CPU0 ] CS.mode = 16 bit
-00564870000i[CPU0 ] SS.mode = 16 bit
-00564870000i[CPU0 ] EFER   = 0x00000000
-00564870000i[CPU0 ] | EAX=00001648  EBX=00001606  ECX=00090200  EDX=00000000
-00564870000i[CPU0 ] | ESP=0000cbb6  EBP=0000ffbe  ESI=000e1647  EDI=0000001e
-00564870000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf ZF af PF cf
-00564870000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
-00564870000i[CPU0 ] |  CS:1000( 0004| 0|  0) 00010000 0000ffff 0 0
-00564870000i[CPU0 ] |  DS:1000( 0005| 0|  0) 00010000 0000ffff 0 0
-00564870000i[CPU0 ] |  SS:1000( 0005| 0|  0) 00010000 0000ffff 0 0
-00564870000i[CPU0 ] |  ES:1000( 0005| 0|  0) 00010000 0000ffff 0 0
-00564870000i[CPU0 ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-00564870000i[CPU0 ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-00564870000i[CPU0 ] | EIP=00000493 (00000493)
-00564870000i[CPU0 ] | CR0=0x60000010 CR2=0x00000000
-00564870000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
-00564870000i[CMOS ] Last time is 1430335833 (Wed Apr 29 22:30:33 2015)
-00564870000i[CTRL ] quit_sim called with exit code 1
+00958840000p[SDL  ] >>PANIC<< User requested shutdown.
+00958840000i[CPU0 ] CPU is in real mode (active)
+00958840000i[CPU0 ] CS.mode = 16 bit
+00958840000i[CPU0 ] SS.mode = 16 bit
+00958840000i[CPU0 ] EFER   = 0x00000000
+00958840000i[CPU0 ] | EAX=00000024  EBX=00000000  ECX=00090000  EDX=00000000
+00958840000i[CPU0 ] | ESP=0000ff22  EBP=0000ff3c  ESI=000e0a12  EDI=0000ffac
+00958840000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf ZF af PF cf
+00958840000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
+00958840000i[CPU0 ] |  CS:f000( 0004| 0|  0) 000f0000 0000ffff 0 0
+00958840000i[CPU0 ] |  DS:0040( 0005| 0|  0) 00000400 0000ffff 0 0
+00958840000i[CPU0 ] |  SS:2000( 0005| 0|  0) 00020000 0000ffff 0 0
+00958840000i[CPU0 ] |  ES:2000( 0005| 0|  0) 00020000 0000ffff 0 0
+00958840000i[CPU0 ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+00958840000i[CPU0 ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+00958840000i[CPU0 ] | EIP=0000e873 (0000e873)
+00958840000i[CPU0 ] | CR0=0x60000010 CR2=0x00000000
+00958840000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
+00958840000i[CMOS ] Last time is 1430340540 (Wed Apr 29 23:49:00 2015)
+00958840000i[CTRL ] quit_sim called with exit code 1

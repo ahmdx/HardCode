@@ -20,14 +20,6 @@ void handleCommand(char* input) {
   //   char* programName;
   //   char* fileName;
   //   char buffer[13312];
-  char directory[512];
-  char dirName[32];
-  char fileName[32];
-  char lineRead[100];
-  char file[13312];
-  int dirIndex = 0;
-  int dirEntry = 0;
-  int dirSector = 1;
   char* viewFileName;
   char viewBuffer[13312];
   int v = 0;
@@ -41,6 +33,15 @@ void handleCommand(char* input) {
   char* filename2;
   char copyBuffer[13312];
   int copycheck = 0;
+//   char directory[512];
+//   char dirName[32];
+//   char fileName[32];
+//   char lineRead[100];
+//   char file[13312];
+//   int dirIndex = 0;
+//   int dirEntry = 0;
+//   int dirSector = 1;
+  
   
   
   
@@ -75,37 +76,37 @@ void handleCommand(char* input) {
   } else if (input[0] == 'c' && input[1] == 'o' && input[2] == 'p' && input[3] == 'y') {
     interrupt(0x21,9,input,0,0);
   } else if (input[0] == 'd' && input[1] == 'i' && input[2] == 'r') {
-    interrupt(0x21, 2, directory, 2, 0);
-    while (dirIndex < 16) {
-      if (directory[dirIndex*32] != 0x00) {
-	dirEntry = 0;
-	while(dirEntry < 6) {
-	  if (directory[dirIndex*32 + dirEntry] != 0x00) {
-	    dirName[dirEntry] = directory[dirIndex*32 + dirEntry];
-	  } else {
-	    dirName[dirEntry] = 0x5F;
-	  }
-	  dirEntry++;
-	}
-	// 		dirEntry = 6;
-	// 		while(dirEntry < 32) {
-	// 		  if (directory[dirIndex*32 + dirEntry] == 0x00) {
-	// 			break;
-	// 		  }
-	// 		  dirSector++;
-	// 		  dirEntry++;
-	// 		}
-	// 		interrupt(0x21, 0, 2 + '0', 0, 0);
-	dirEntry = 6;
-	dirName[dirEntry + 0] = 1 + '0';
-	dirName[dirEntry + 0] = '\r';
-	dirName[dirEntry + 1] = '\n';
-	dirName[dirEntry + 2] = 0x00;
-	interrupt(0x21, 0, dirName, 0, 0);
-	dirSector = 0;
-      }
-      dirIndex++;
-    }
+//     interrupt(0x21, 2, directory, 2, 0);
+//     while (dirIndex < 16) {
+//       if (directory[dirIndex*32] != 0x00) {
+// 	dirEntry = 0;
+// 	while(dirEntry < 6) {
+// 	  if (directory[dirIndex*32 + dirEntry] != 0x00) {
+// 	    dirName[dirEntry] = directory[dirIndex*32 + dirEntry];
+// 	  } else {
+// 	    dirName[dirEntry] = 0x5F;
+// 	  }
+// 	  dirEntry++;
+// 	}
+// 	// 		dirEntry = 6;
+// 	// 		while(dirEntry < 32) {
+// 	// 		  if (directory[dirIndex*32 + dirEntry] == 0x00) {
+// 	// 			break;
+// 	// 		  }
+// 	// 		  dirSector++;
+// 	// 		  dirEntry++;
+// 	// 		}
+// 	// 		interrupt(0x21, 0, 2 + '0', 0, 0);
+// 	dirEntry = 6;
+// 	dirName[dirEntry + 0] = 1 + '0';
+// 	dirName[dirEntry + 0] = '\r';
+// 	dirName[dirEntry + 1] = '\n';
+// 	dirName[dirEntry + 2] = 0x00;
+// 	interrupt(0x21, 0, dirName, 0, 0);
+// 	dirSector = 0;
+//       }
+//       dirIndex++;
+//     }
     
   } else if (input[0] == 'c' && input[1] == 'r' && input[2] == 'e' && input[3] == 'a' && input[4] == 't' && input[5] == 'e') {
     //     	while(input[dirIndex + 7] != '\0') {
