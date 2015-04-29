@@ -2,11 +2,6 @@ void handleCommand(char*);
 
 int main() {
   char line[100];
-  char directory[512];
-  char dirName[32];
-  int dirIndex = 0;
-  int dirEntry = 0;
-  int dirSector = 0;
   //while(1) {
   // makeInterrupt21();
   interrupt(0x21, 0, "shell$ ", 0, 0);
@@ -17,14 +12,6 @@ int main() {
 }
 
 void handleCommand(char* input) {
-  char directory[512];
-  char dirName[32];
-  char fileName[32];
-  char lineRead[100];
-  char file[13312];
-  int dirIndex = 0;
-  int dirEntry = 0;
-  int dirSector = 1;
   //   int i = 0;
   //   int comm = 0;
   //   char* view = "view";
@@ -33,78 +20,123 @@ void handleCommand(char* input) {
   //   char* programName;
   //   char* fileName;
   //   char buffer[13312];
-
+  char directory[512];
+  char dirName[32];
+  char fileName[32];
+  char lineRead[100];
+  char file[13312];
+  int dirIndex = 0;
+  int dirEntry = 0;
+  int dirSector = 1;
+  char* viewFileName;
+  char viewBuffer[13312];
+  int v = 0;
+  char* execProgramName;
+  int e = 0;
+  char* deleteFileName;
+  int d = 0;
+  int c = 0;
+  int cc = 0;
+  char* filename1;
+  char* filename2;
+  char copyBuffer[13312];
+  int copycheck = 0;
+  
+  
+  
   if (input[0] == 'v' && input[1] == 'i' && input[2] == 'e' && input[3] == 'w') {
-	interrupt(0x21, 0, "view", 0, 0);
+    while(v<6){
+      if(input[v+5] == "\0"){		//v+5 to skip "view "
+	break;
+      }
+      viewFileName[v] = input[v+5];
+      v++;
+    }
+    interrupt(0x21, 3, viewFileName, viewBuffer, 0);
+    interrupt(0x21, 0, viewBuffer, 0, 0);
   } else if (input[0] == 'e' && input[1] == 'x' && input[2] == 'e' && input[3] == 'c' && input[4] == 'u' && input[5] == 't' && input[6] == 'e') {
-	interrupt(0x21, 0, "execute", 0, 0);
+    while(e<6){
+      if(input[e+8] == "\0"){		//e+8 to skip "execute "
+	break;
+      }
+      execProgramName[e] = input[e+8];
+      e++;
+    }
+    interrupt(0x21, 4, execProgramName, 0x2000, 0);
   } else if (input[0] == 'd' && input[1] == 'e' && input[2] == 'l' && input[3] == 'e' && input[4] == 't' && input[5] == 'e') {
-	interrupt(0x21, 0, "delete", 0, 0);
+    while(d<6){
+      if(input[d+7] == "\0"){
+	break;
+      }
+      deleteFileName[d] = input[d+7];
+      d++;
+    }
+    interrupt(0x21,7,deleteFileName,0,0);
   } else if (input[0] == 'c' && input[1] == 'o' && input[2] == 'p' && input[3] == 'y') {
-	interrupt(0x21, 0, "copy", 0, 0);
-  }
-  else if (input[0] == 'd' && input[1] == 'i' && input[2] == 'r') {
-	interrupt(0x21, 2, directory, 2, 0);
-	while (dirIndex < 16) {
-	  if (directory[dirIndex*32] != 0x00) {
-		dirEntry = 0;
-		while(dirEntry < 6) {
-		  if (directory[dirIndex*32 + dirEntry] != 0x00) {
-			dirName[dirEntry] = directory[dirIndex*32 + dirEntry];
-		  } else {
-			dirName[dirEntry] = 0x5F;
-		  }
-		  dirEntry++;
-		}
-// 		dirEntry = 6;
-// 		while(dirEntry < 32) {
-// 		  if (directory[dirIndex*32 + dirEntry] == 0x00) {
-// 			break;
-// 		  }
-// 		  dirSector++;
-// 		  dirEntry++;
-// 		}
-// 		interrupt(0x21, 0, 2 + '0', 0, 0);
-		dirEntry = 6;
-		dirName[dirEntry + 0] = 1 + '0';
-		dirName[dirEntry + 0] = '\r';
-		dirName[dirEntry + 1] = '\n';
-		dirName[dirEntry + 2] = 0x00;
-		interrupt(0x21, 0, dirName, 0, 0);
-		dirSector = 0;
+    interrupt(0x21,9,input,0,0);
+  } else if (input[0] == 'd' && input[1] == 'i' && input[2] == 'r') {
+    interrupt(0x21, 2, directory, 2, 0);
+    while (dirIndex < 16) {
+      if (directory[dirIndex*32] != 0x00) {
+	dirEntry = 0;
+	while(dirEntry < 6) {
+	  if (directory[dirIndex*32 + dirEntry] != 0x00) {
+	    dirName[dirEntry] = directory[dirIndex*32 + dirEntry];
+	  } else {
+	    dirName[dirEntry] = 0x5F;
 	  }
-	  dirIndex++;
+	  dirEntry++;
 	}
+	// 		dirEntry = 6;
+	// 		while(dirEntry < 32) {
+	// 		  if (directory[dirIndex*32 + dirEntry] == 0x00) {
+	// 			break;
+	// 		  }
+	// 		  dirSector++;
+	// 		  dirEntry++;
+	// 		}
+	// 		interrupt(0x21, 0, 2 + '0', 0, 0);
+	dirEntry = 6;
+	dirName[dirEntry + 0] = 1 + '0';
+	dirName[dirEntry + 0] = '\r';
+	dirName[dirEntry + 1] = '\n';
+	dirName[dirEntry + 2] = 0x00;
+	interrupt(0x21, 0, dirName, 0, 0);
+	dirSector = 0;
+      }
+      dirIndex++;
+    }
+    
+  } else if (input[0] == 'c' && input[1] == 'r' && input[2] == 'e' && input[3] == 'a' && input[4] == 't' && input[5] == 'e') {
+    //     	while(input[dirIndex + 7] != '\0') {
+    //     	  fileName[dirIndex] = input[dirIndex + 7];
+    //     	  dirIndex++;
+    //     	}
+    //     	interrupt(0x21, 0, "create> ",0, 0);
+    //     	interrupt(0x21, 1, lineRead, 0, 0);
+    //     	while(lineRead[0] != 0xd) {
+    //     	  dirIndex = 0;
+    //     	  while(lineRead[dirIndex] != '\0') {
+    //     		file[dirEntry] = lineRead[dirIndex];
+    //     		dirIndex++;
+    //     		dirEntry++;
+    //     	  }
+    //     	  interrupt(0x21, 0, "create> ",0, 0);
+    //     	  interrupt(0x21, 1, lineRead, 0, 0);
+    //     	}
+    //     	interrupt(0x21, 8, fileName, file, 1);
+    //       }
+  } else {
+    interrupt(0x21, 0, "Fatal: Bad command - ", 0, 0);
+    interrupt(0x21, 0, input, 0, 0);
   }
-  //   else if (input[0] == 'c' && input[1] == 'r' && input[2] == 'e' && input[3] == 'a' && input[4] == 't' && input[5] == 'e') {
-  // 	while(input[dirIndex + 7] != '\0') {
-  // 	  fileName[dirIndex] = input[dirIndex + 7];
-  // 	  dirIndex++;
-  // 	}
-  // 	interrupt(0x21, 0, "create> ",0, 0);
-  // 	interrupt(0x21, 1, lineRead, 0, 0);
-  // 	while(lineRead[0] != 0xd) {
-  // 	  dirIndex = 0;
-  // 	  while(lineRead[dirIndex] != '\0') {
-  // 		file[dirEntry] = lineRead[dirIndex];
-  // 		dirIndex++;
-  // 		dirEntry++;
-  // 	  }
-  // 	  interrupt(0x21, 0, "create> ",0, 0);
-  // 	  interrupt(0x21, 1, lineRead, 0, 0);
-  // 	}
-  // 	interrupt(0x21, 8, fileName, file, 1);
-  //   }
-  else {
-	interrupt(0x21, 0, "Fatal: Bad command - ", 0, 0);
-	interrupt(0x21, 0, input, 0, 0);
-  }
-  interrupt(0x21, 0, "\r", 0, 0);
-  interrupt(0x21, 0, "\n", 0, 0);
-
+  return;
+  // interrupt(0x21, 0, "\r", 0, 0);
+  // interrupt(0x21, 0, "\n", 0, 0);
+  
   //   interrupt(0x21, 0, "\r", 0, 0);
   //   interrupt(0x21, 0, "\n", 0, 0);
-
+  
   //   while(i<4){		//check if equal "view"
   // 	if(input[i] != view[i]){
   // 	  checkEqual = 0;

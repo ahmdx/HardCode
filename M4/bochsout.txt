@@ -1,106 +1,90 @@
-00000000000i[     ] Bochs x86 Emulator 2.4.6
-00000000000i[     ]   Build from CVS snapshot, on February 22, 2011
-00000000000i[     ] Compiled at Jun  8 2013, 05:16:04
+00000000000i[     ] Bochs x86 Emulator 2.6
+00000000000i[     ]   Built from SVN snapshot on September 2nd, 2012
+00000000000i[     ] Compiled on May 30 2014 at 11:14:37
 00000000000i[     ] System configuration
 00000000000i[     ]   processors: 1 (cores=1, HT threads=1)
 00000000000i[     ]   A20 line support: yes
+00000000000i[     ] IPS is set to 10000000
 00000000000i[     ] CPU configuration
 00000000000i[     ]   level: 6
 00000000000i[     ]   SMP support: no
-00000000000i[     ]   APIC support: yes
+00000000000i[     ]   APIC support: xapic
 00000000000i[     ]   FPU support: yes
 00000000000i[     ]   MMX support: yes
 00000000000i[     ]   3dnow! support: no
 00000000000i[     ]   SEP support: yes
 00000000000i[     ]   SSE support: sse2
-00000000000i[     ]   XSAVE support: no
+00000000000i[     ]   XSAVE support: no 
 00000000000i[     ]   AES support: no
 00000000000i[     ]   MOVBE support: no
+00000000000i[     ]   ADX support: no
 00000000000i[     ]   x86-64 support: yes
 00000000000i[     ]   1G paging support: no
-00000000000i[     ]   VMX support: no
+00000000000i[     ]   MWAIT support: yes
+00000000000i[     ]   AVX support: no
+00000000000i[     ]   VMX support: 1
 00000000000i[     ] Optimization configuration
 00000000000i[     ]   RepeatSpeedups support: yes
-00000000000i[     ]   Trace cache support: yes
 00000000000i[     ]   Fast function calls: yes
+00000000000i[     ]   Handlers Chaining speedups: no
 00000000000i[     ] Devices configuration
-00000000000i[     ]   ACPI support: yes
 00000000000i[     ]   NE2000 support: yes
 00000000000i[     ]   PCI support: yes, enabled=yes
 00000000000i[     ]   SB16 support: yes
 00000000000i[     ]   USB support: yes
-00000000000i[     ]   VGA extension support: vbe 
-00000000000i[MEM0 ] allocated memory at 0x7f2e834f6010. after alignment, vector=0x7f2e834f7000
+00000000000i[     ]   VGA extension support: vbe cirrus
+00000000000i[MEM0 ] allocated memory at 0x7fda785da010. after alignment, vector=0x7fda785db000
 00000000000i[MEM0 ] 32.00MB
 00000000000i[MEM0 ] mem block size = 0x00100000, blocks=32
 00000000000i[MEM0 ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
-00000000000i[MEM0 ] rom at 0xc0000/41472 ('/usr/share/bochs/VGABIOS-lgpl-latest')
-00000000000i[     ] lt_dlhandle is 0x2129af0
-00000000000i[PLGIN] loaded plugin libbx_cmos.so
-00000000000i[     ] lt_dlhandle is 0x212a510
-00000000000i[PLGIN] loaded plugin libbx_dma.so
-00000000000i[     ] lt_dlhandle is 0x212af70
-00000000000i[PLGIN] loaded plugin libbx_pic.so
-00000000000i[     ] lt_dlhandle is 0x212b7b0
-00000000000i[PLGIN] loaded plugin libbx_pit.so
-00000000000i[     ] lt_dlhandle is 0x212c120
-00000000000i[PLGIN] loaded plugin libbx_vga.so
-00000000000i[     ] lt_dlhandle is 0x212c880
+00000000000i[     ] lt_dlhandle is 0x3b95d30
 00000000000i[PLGIN] loaded plugin libbx_hdimage.so
-00000000000i[     ] lt_dlhandle is 0x212d180
-00000000000i[PLGIN] loaded plugin libbx_floppy.so
-00000000000i[     ] lt_dlhandle is 0x212dd40
-00000000000i[PLGIN] loaded plugin libbx_soundmod.so
-00000000000i[     ] lt_dlhandle is 0x212e5f0
+00000000000i[     ] lt_dlhandle is 0x3b966a0
 00000000000i[PLGIN] loaded plugin libbx_pci.so
-00000000000i[     ] lt_dlhandle is 0x212f1b0
+00000000000i[     ] lt_dlhandle is 0x3b97250
 00000000000i[PLGIN] loaded plugin libbx_pci2isa.so
-00000000000i[     ] lt_dlhandle is 0x212faf0
-00000000000i[PLGIN] loaded plugin libbx_usb_common.so
-00000000000i[     ] lt_dlhandle is 0x2130390
-00000000000i[PLGIN] loaded plugin libbx_unmapped.so
-00000000000i[     ] lt_dlhandle is 0x2130c10
-00000000000i[PLGIN] loaded plugin libbx_biosdev.so
-00000000000i[     ] lt_dlhandle is 0x21315e0
-00000000000i[PLGIN] loaded plugin libbx_speaker.so
-00000000000i[     ] lt_dlhandle is 0x2131d70
-00000000000i[PLGIN] loaded plugin libbx_extfpuirq.so
-00000000000i[     ] lt_dlhandle is 0x21325f0
-00000000000i[PLGIN] loaded plugin libbx_gameport.so
-00000000000i[     ] lt_dlhandle is 0x2132f80
-00000000000i[PLGIN] loaded plugin libbx_pci_ide.so
-00000000000i[     ] lt_dlhandle is 0x2133960
+00000000000i[     ] lt_dlhandle is 0x3b97c40
 00000000000i[PLGIN] loaded plugin libbx_acpi.so
-00000000000i[     ] lt_dlhandle is 0x21342a0
+00000000000i[     ] lt_dlhandle is 0x3b98680
+00000000000i[PLGIN] loaded plugin libbx_cmos.so
+00000000000i[     ] lt_dlhandle is 0x3b98fc0
+00000000000i[PLGIN] loaded plugin libbx_dma.so
+00000000000i[     ] lt_dlhandle is 0x3b99a50
+00000000000i[PLGIN] loaded plugin libbx_pic.so
+00000000000i[     ] lt_dlhandle is 0x3b9a2f0
+00000000000i[PLGIN] loaded plugin libbx_pit.so
+00000000000i[     ] lt_dlhandle is 0x3b9ad20
+00000000000i[PLGIN] loaded plugin libbx_floppy.so
+00000000000i[     ] lt_dlhandle is 0x3b9b910
+00000000000i[PLGIN] loaded plugin libbx_vga.so
+00000000000i[     ] lt_dlhandle is 0x3b9c0a0
 00000000000i[PLGIN] loaded plugin libbx_ioapic.so
-00000000000i[     ] lt_dlhandle is 0x2134c50
+00000000000i[     ] lt_dlhandle is 0x3b9cae0
 00000000000i[PLGIN] loaded plugin libbx_keyboard.so
-00000000000i[     ] lt_dlhandle is 0x2135460
+00000000000i[     ] lt_dlhandle is 0x3b9d380
 00000000000i[PLGIN] loaded plugin libbx_harddrv.so
-00000000000i[     ] lt_dlhandle is 0x2147540
-00000000000i[PLGIN] loaded plugin libbx_serial.so
-00000000000i[     ] lt_dlhandle is 0x21483c0
-00000000000i[PLGIN] loaded plugin libbx_parallel.so
+00000000000i[     ] lt_dlhandle is 0x3baf470
+00000000000i[PLGIN] loaded plugin libbx_pci_ide.so
+00000000000i[PLGIN] init_dev of 'pci' plugin device by virtual method
+00000000000i[PCI  ] 440FX Host bridge present at device 0, function 0
+00000000000i[PLGIN] init_dev of 'pci2isa' plugin device by virtual method
+00000000000i[PCI  ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
+00000000000i[PLGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS ] Using local time for initial clock
-00000000000i[CMOS ] Setting initial clock to: Wed Apr 29 21:43:38 2015 (time0=1430333018)
+00000000000i[CMOS ] Setting initial clock to: Wed Apr 29 22:29:37 2015 (time0=1430335777)
+00000000000i[PLGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA  ] channel 4 used by cascade
+00000000000i[PLGIN] init_dev of 'pic' plugin device by virtual method
+00000000000i[PLGIN] init_dev of 'pit' plugin device by virtual method
+00000000000i[PLGIN] init_dev of 'floppy' plugin device by virtual method
 00000000000i[DMA  ] channel 2 used by Floppy Drive
 00000000000i[FDD  ] fd0: 'floppya.img' ro=0, h=2,t=80,spt=18
-00000000000i[PCI  ] 440FX Host bridge present at device 0, function 0
-00000000000i[PCI  ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
-00000000000i[VGA  ] interval=300000
+00000000000i[PLGIN] init_dev of 'vga' plugin device by virtual method
 00000000000i[MEM0 ] Register memory access handlers: 0x00000000000a0000 - 0x00000000000bffff
+00000000000i[VGA  ] interval=333333
 00000000000i[MEM0 ] Register memory access handlers: 0x00000000e0000000 - 0x00000000e0ffffff
-00000000000i[VGA  ] VBE Bochs Display Extension Enabled
-00000000000i[PLGIN] init_dev of 'unmapped' plugin device by virtual method
-00000000000i[PLGIN] init_dev of 'biosdev' plugin device by virtual method
-00000000000i[PLGIN] init_dev of 'speaker' plugin device by virtual method
-00000000000i[SPEAK] Failed to open /dev/console: Resource temporarily unavailable
-00000000000i[SPEAK] Deactivating beep on console
-00000000000i[PLGIN] init_dev of 'extfpuirq' plugin device by virtual method
-00000000000i[PLGIN] init_dev of 'gameport' plugin device by virtual method
-00000000000i[PLGIN] init_dev of 'pci_ide' plugin device by virtual method
-00000000000i[PCI  ] PIIX3 PCI IDE controller present at device 1, function 1
+00000000000i[BXVGA] VBE Bochs Display Extension Enabled
+00000000000i[MEM0 ] rom at 0xc0000/41472 ('/usr/share/bochs/VGABIOS-lgpl-latest')
 00000000000i[PLGIN] init_dev of 'acpi' plugin device by virtual method
 00000000000i[PCI  ] ACPI Controller present at device 1, function 3
 00000000000i[PLGIN] init_dev of 'ioapic' plugin device by virtual method
@@ -111,120 +95,253 @@
 00000000000i[PLGIN] init_dev of 'harddrv' plugin device by virtual method
 00000000000i[HD   ] Using boot sequence floppy, none, none
 00000000000i[HD   ] Floppy boot signature check is enabled
-00000000000i[PLGIN] init_dev of 'serial' plugin device by virtual method
-00000000000i[SER  ] com1 at 0x03f8 irq 4
+00000000000i[PLGIN] init_dev of 'pci_ide' plugin device by virtual method
+00000000000i[PCI  ] PIIX3 PCI IDE controller present at device 1, function 1
+00000000000i[PLGIN] init_dev of 'unmapped' plugin device by virtual method
+00000000000i[PLGIN] init_dev of 'biosdev' plugin device by virtual method
+00000000000i[PLGIN] init_dev of 'speaker' plugin device by virtual method
+00000000000i[PLGIN] init_dev of 'extfpuirq' plugin device by virtual method
 00000000000i[PLGIN] init_dev of 'parallel' plugin device by virtual method
 00000000000i[PAR  ] parallel port 1 at 0x0378 irq 7
+00000000000i[PLGIN] init_dev of 'serial' plugin device by virtual method
+00000000000i[SER  ] com1 at 0x03f8 irq 4
+00000000000i[PLGIN] init_dev of 'gameport' plugin device by virtual method
+00000000000i[PLGIN] init_dev of 'iodebug' plugin device by virtual method
+00000000000i[PLGIN] register state of 'pci' plugin device by virtual method
+00000000000i[PLGIN] register state of 'pci2isa' plugin device by virtual method
+00000000000i[PLGIN] register state of 'cmos' plugin device by virtual method
+00000000000i[PLGIN] register state of 'dma' plugin device by virtual method
+00000000000i[PLGIN] register state of 'pic' plugin device by virtual method
+00000000000i[PLGIN] register state of 'pit' plugin device by virtual method
+00000000000i[PLGIN] register state of 'floppy' plugin device by virtual method
+00000000000i[PLGIN] register state of 'vga' plugin device by virtual method
 00000000000i[PLGIN] register state of 'unmapped' plugin device by virtual method
 00000000000i[PLGIN] register state of 'biosdev' plugin device by virtual method
 00000000000i[PLGIN] register state of 'speaker' plugin device by virtual method
 00000000000i[PLGIN] register state of 'extfpuirq' plugin device by virtual method
+00000000000i[PLGIN] register state of 'parallel' plugin device by virtual method
+00000000000i[PLGIN] register state of 'serial' plugin device by virtual method
 00000000000i[PLGIN] register state of 'gameport' plugin device by virtual method
-00000000000i[PLGIN] register state of 'pci_ide' plugin device by virtual method
+00000000000i[PLGIN] register state of 'iodebug' plugin device by virtual method
 00000000000i[PLGIN] register state of 'acpi' plugin device by virtual method
 00000000000i[PLGIN] register state of 'ioapic' plugin device by virtual method
 00000000000i[PLGIN] register state of 'keyboard' plugin device by virtual method
 00000000000i[PLGIN] register state of 'harddrv' plugin device by virtual method
-00000000000i[PLGIN] register state of 'serial' plugin device by virtual method
-00000000000i[PLGIN] register state of 'parallel' plugin device by virtual method
+00000000000i[PLGIN] register state of 'pci_ide' plugin device by virtual method
 00000000000i[SYS  ] bx_pc_system_c::Reset(HARDWARE) called
 00000000000i[CPU0 ] cpu hardware reset
 00000000000i[APIC0] allocate APIC id=0 (MMIO enabled) to 0x00000000fee00000
-00000000000i[CPU0 ] CPUID[0x00000000]: 00000003 756e6547 6c65746e 49656e69
-00000000000i[CPU0 ] CPUID[0x00000001]: 00000f23 00000800 00002000 07cbfbff
+00000000000i[CPU0 ] CPUID[0x00000000]: 00000002 756e6547 6c65746e 49656e69
+00000000000i[CPU0 ] CPUID[0x00000001]: 00000633 00010800 00002028 1fcbfbff
 00000000000i[CPU0 ] CPUID[0x00000002]: 00410601 00000000 00000000 00000000
-00000000000i[CPU0 ] CPUID[0x00000003]: 00000000 00000000 00000000 00000000
-00000000000i[CPU0 ] CPUID[0x00000004]: 00000000 00000000 00000000 00000000
-00000000000i[CPU0 ] CPUID[0x00000007]: 00000000 00000000 00000000 00000000
 00000000000i[CPU0 ] CPUID[0x80000000]: 80000008 00000000 00000000 00000000
-00000000000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000001 2a100800
+00000000000i[CPU0 ] CPUID[0x80000001]: 00000000 00000000 00000101 2a100000
 00000000000i[CPU0 ] CPUID[0x80000002]: 20202020 20202020 20202020 6e492020
 00000000000i[CPU0 ] CPUID[0x80000003]: 286c6574 50202952 69746e65 52286d75
 00000000000i[CPU0 ] CPUID[0x80000004]: 20342029 20555043 20202020 00202020
+00000000000i[CPU0 ] CPUID[0x80000005]: 01ff01ff 01ff01ff 40020140 40020140
 00000000000i[CPU0 ] CPUID[0x80000006]: 00000000 42004200 02008140 00000000
 00000000000i[CPU0 ] CPUID[0x80000007]: 00000000 00000000 00000000 00000000
 00000000000i[CPU0 ] CPUID[0x80000008]: 00003028 00000000 00000000 00000000
-00000000000i[PLGIN] reset of 'unmapped' plugin device by virtual method
-00000000000i[PLGIN] reset of 'biosdev' plugin device by virtual method
-00000000000i[PLGIN] reset of 'speaker' plugin device by virtual method
-00000000000i[PLGIN] reset of 'extfpuirq' plugin device by virtual method
-00000000000i[PLGIN] reset of 'gameport' plugin device by virtual method
-00000000000i[PLGIN] reset of 'pci_ide' plugin device by virtual method
+00000000000i[PLGIN] reset of 'pci' plugin device by virtual method
+00000000000i[PLGIN] reset of 'pci2isa' plugin device by virtual method
+00000000000i[PLGIN] reset of 'cmos' plugin device by virtual method
+00000000000i[PLGIN] reset of 'dma' plugin device by virtual method
+00000000000i[PLGIN] reset of 'pic' plugin device by virtual method
+00000000000i[PLGIN] reset of 'pit' plugin device by virtual method
+00000000000i[PLGIN] reset of 'floppy' plugin device by virtual method
+00000000000i[PLGIN] reset of 'vga' plugin device by virtual method
 00000000000i[PLGIN] reset of 'acpi' plugin device by virtual method
 00000000000i[PLGIN] reset of 'ioapic' plugin device by virtual method
 00000000000i[PLGIN] reset of 'keyboard' plugin device by virtual method
 00000000000i[PLGIN] reset of 'harddrv' plugin device by virtual method
-00000000000i[PLGIN] reset of 'serial' plugin device by virtual method
+00000000000i[PLGIN] reset of 'pci_ide' plugin device by virtual method
+00000000000i[PLGIN] reset of 'unmapped' plugin device by virtual method
+00000000000i[PLGIN] reset of 'biosdev' plugin device by virtual method
+00000000000i[PLGIN] reset of 'speaker' plugin device by virtual method
+00000000000e[SPEAK] Failed to open /dev/console: Permission denied
+00000000000e[SPEAK] Deactivating beep on console
+00000000000i[PLGIN] reset of 'extfpuirq' plugin device by virtual method
 00000000000i[PLGIN] reset of 'parallel' plugin device by virtual method
-00000003305i[BIOS ] $Revision: 1.257 $ $Date: 2011/01/26 09:52:02 $
-00000320056i[KBD  ] reset-disable command received
-00000452888i[VBIOS] VGABios $Id: vgabios.c,v 1.75 2011/10/15 14:07:21 vruppert Exp $
-00000452959i[VGA  ] VBE known Display Interface b0c0
-00000452991i[VGA  ] VBE known Display Interface b0c5
-00000455916i[VBIOS] VBE Bios $Id: vbe.c,v 1.64 2011/07/19 18:25:05 vruppert Exp $
-00000776032i[BIOS ] Starting rombios32
-00000776470i[BIOS ] Shutdown flag 0
-00000777054i[BIOS ] ram_size=0x02000000
-00000777475i[BIOS ] ram_end=32MB
-00000877335i[BIOS ] Found 1 cpu(s)
-00000893183i[BIOS ] bios_table_addr: 0x000fb928 end=0x000fcc00
-00000893277i[PCI  ] 440FX PMC write to PAM register 59 (TLB Flush)
-00001220974i[PCI  ] 440FX PMC write to PAM register 59 (TLB Flush)
-00001548902i[P2I  ] PCI IRQ routing: PIRQA# set to 0x0b
-00001548921i[P2I  ] PCI IRQ routing: PIRQB# set to 0x09
-00001548940i[P2I  ] PCI IRQ routing: PIRQC# set to 0x0b
-00001548959i[P2I  ] PCI IRQ routing: PIRQD# set to 0x09
-00001548969i[P2I  ] write: ELCR2 = 0x0a
-00001549740i[BIOS ] PIIX3/PIIX4 init: elcr=00 0a
-00001557412i[BIOS ] PCI: bus=0 devfn=0x00: vendor_id=0x8086 device_id=0x1237 class=0x0600
-00001559687i[BIOS ] PCI: bus=0 devfn=0x08: vendor_id=0x8086 device_id=0x7000 class=0x0601
-00001561801i[BIOS ] PCI: bus=0 devfn=0x09: vendor_id=0x8086 device_id=0x7010 class=0x0101
-00001562025i[PIDE ] new BM-DMA address: 0xc000
-00001562640i[BIOS ] region 4: 0x0000c000
-00001564667i[BIOS ] PCI: bus=0 devfn=0x0b: vendor_id=0x8086 device_id=0x7113 class=0x0680
-00001564896i[ACPI ] new irq line = 11
-00001564908i[ACPI ] new irq line = 9
-00001564933i[ACPI ] new PM base address: 0xb000
-00001564947i[ACPI ] new SM base address: 0xb100
-00001564975i[PCI  ] setting SMRAM control register to 0x4a
-00001729068i[CPU0 ] Enter to System Management Mode
-00001729078i[CPU0 ] RSM: Resuming from System Management Mode
-00001893099i[PCI  ] setting SMRAM control register to 0x0a
-00001901849i[BIOS ] MP table addr=0x000fba00 MPC table addr=0x000fb930 size=0xd0
-00001903663i[BIOS ] SMBIOS table addr=0x000fba10
-00001906818i[BIOS ] Firmware waking vector 0x1ff00cc
-00001911742i[BIOS ] ACPI tables: RSDP addr=0x000fbb30 ACPI DATA addr=0x01ff0000 size=0x1f18
-00001911778i[PCI  ] 440FX PMC write to PAM register 59 (TLB Flush)
-00001912502i[BIOS ] bios_table_cur_addr: 0x000fbb54
-00032315744i[BIOS ] Booting from 0000:7c00
-00643890000p[SDL  ] >>PANIC<< User requested shutdown.
-00643890000i[CPU0 ] CPU is in real mode (active)
-00643890000i[CPU0 ] CS.d_b = 16 bit
-00643890000i[CPU0 ] SS.d_b = 16 bit
-00643890000i[CPU0 ] EFER   = 0x00000000
-00643890000i[CPU0 ] | RAX=0000000000000000  RBX=0000000000000026
-00643890000i[CPU0 ] | RCX=0000000000090000  RDX=0000000000000000
-00643890000i[CPU0 ] | RSP=000000000000fcfc  RBP=000000000000fd16
-00643890000i[CPU0 ] | RSI=00000000000e090e  RDI=000000000000ffac
-00643890000i[CPU0 ] |  R8=0000000000000000   R9=0000000000000000
-00643890000i[CPU0 ] | R10=0000000000000000  R11=0000000000000000
-00643890000i[CPU0 ] | R12=0000000000000000  R13=0000000000000000
-00643890000i[CPU0 ] | R14=0000000000000000  R15=0000000000000000
-00643890000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df IF tf sf ZF af PF cf
-00643890000i[CPU0 ] | SEG selector     base    limit G D
-00643890000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
-00643890000i[CPU0 ] |  CS:f000( 0004| 0|  0) 000f0000 0000ffff 0 0
-00643890000i[CPU0 ] |  DS:0040( 0005| 0|  0) 00000400 0000ffff 0 0
-00643890000i[CPU0 ] |  SS:2000( 0005| 0|  0) 00020000 0000ffff 0 0
-00643890000i[CPU0 ] |  ES:2000( 0005| 0|  0) 00020000 0000ffff 0 0
-00643890000i[CPU0 ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-00643890000i[CPU0 ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-00643890000i[CPU0 ] |  MSR_FS_BASE:0000000000000000
-00643890000i[CPU0 ] |  MSR_GS_BASE:0000000000000000
-00643890000i[CPU0 ] | RIP=000000000000e86c (000000000000e86c)
-00643890000i[CPU0 ] | CR0=0x60000010 CR2=0x0000000000000000
-00643890000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
-00643890000i[CPU0 ] 0x000000000000e86c>> nop  : 90
-00643890000i[CMOS ] Last time is 1430333082 (Wed Apr 29 21:44:42 2015)
-00643890000i[     ] restoring default signal behavior
-00643890000i[CTRL ] quit_sim called with exit code 1
+00000000000i[PLGIN] reset of 'serial' plugin device by virtual method
+00000000000i[PLGIN] reset of 'gameport' plugin device by virtual method
+00000000000i[PLGIN] reset of 'iodebug' plugin device by virtual method
+00000000000i[     ] set SIGINT handler to bx_debug_ctrlc_handler
+00000000025i[MEM0 ] allocate_block: block=0x0 used 0x1 of 0x20
+00000004661i[BIOS ] $Revision: 11318 $ $Date: 2012-08-06 19:59:54 +0200 (Mo, 06. Aug 2012) $
+00000320062i[KBD  ] reset-disable command received
+00000325780i[BIOS ] Starting rombios32
+00000326218i[BIOS ] Shutdown flag 0
+00000326809i[BIOS ] ram_size=0x02000000
+00000327231i[BIOS ] ram_end=32MB
+00000427037i[BIOS ] Found 1 cpu(s)
+00000441210i[BIOS ] bios_table_addr: 0x000fa438 end=0x000fcc00
+00000769004i[PCI  ] 440FX PMC write to PAM register 59 (TLB Flush)
+00001096933i[P2I  ] PCI IRQ routing: PIRQA# set to 0x0b
+00001096952i[P2I  ] PCI IRQ routing: PIRQB# set to 0x09
+00001096971i[P2I  ] PCI IRQ routing: PIRQC# set to 0x0b
+00001096990i[P2I  ] PCI IRQ routing: PIRQD# set to 0x09
+00001097000i[P2I  ] write: ELCR2 = 0x0a
+00001097771i[BIOS ] PIIX3/PIIX4 init: elcr=00 0a
+00001105448i[BIOS ] PCI: bus=0 devfn=0x00: vendor_id=0x8086 device_id=0x1237 class=0x0600
+00001107726i[BIOS ] PCI: bus=0 devfn=0x08: vendor_id=0x8086 device_id=0x7000 class=0x0601
+00001109843i[BIOS ] PCI: bus=0 devfn=0x09: vendor_id=0x8086 device_id=0x7010 class=0x0101
+00001110069i[PIDE ] new BM-DMA address: 0xc000
+00001110685i[BIOS ] region 4: 0x0000c000
+00001112717i[BIOS ] PCI: bus=0 devfn=0x0b: vendor_id=0x8086 device_id=0x7113 class=0x0680
+00001112946i[ACPI ] new irq line = 11
+00001112960i[ACPI ] new irq line = 9
+00001112987i[ACPI ] new PM base address: 0xb000
+00001113001i[ACPI ] new SM base address: 0xb100
+00001113029i[PCI  ] setting SMRAM control register to 0x4a
+00001277122i[CPU0 ] Enter to System Management Mode
+00001277122i[CPU0 ] enter_system_management_mode: temporary disable VMX while in SMM mode
+00001277132i[CPU0 ] RSM: Resuming from System Management Mode
+00001441153i[PCI  ] setting SMRAM control register to 0x0a
+00001456016i[BIOS ] MP table addr=0x000fa510 MPC table addr=0x000fa440 size=0xc8
+00001457830i[BIOS ] SMBIOS table addr=0x000fa520
+00001457882i[MEM0 ] allocate_block: block=0x1f used 0x2 of 0x20
+00001460985i[BIOS ] Firmware waking vector 0x1ff00cc
+00001466008i[BIOS ] ACPI tables: RSDP addr=0x000fa640 ACPI DATA addr=0x01ff0000 size=0x1f22
+00001466044i[PCI  ] 440FX PMC write to PAM register 59 (TLB Flush)
+00001466768i[BIOS ] bios_table_cur_addr: 0x000fa664
+00001594385i[VBIOS] VGABios $Id: vgabios.c,v 1.75 2011/10/15 14:07:21 vruppert Exp $
+00001594456i[BXVGA] VBE known Display Interface b0c0
+00001594488i[BXVGA] VBE known Display Interface b0c5
+00001597413i[VBIOS] VBE Bios $Id: vbe.c,v 1.64 2011/07/19 18:25:05 vruppert Exp $
+00032315171i[BIOS ] Booting from 0000:7c00
+00033783207i[FDD  ] attempt to read/write sector 19 past last sector 18
+00038415967i[FDD  ] attempt to read/write sector 19 past last sector 18
+00043048731i[FDD  ] attempt to read/write sector 19 past last sector 18
+00047681491i[FDD  ] attempt to read/write sector 19 past last sector 18
+00052314255i[FDD  ] attempt to read/write sector 19 past last sector 18
+00056947015i[FDD  ] attempt to read/write sector 19 past last sector 18
+00061579779i[FDD  ] attempt to read/write sector 19 past last sector 18
+00066212550i[FDD  ] attempt to read/write sector 19 past last sector 18
+00070845310i[FDD  ] attempt to read/write sector 19 past last sector 18
+00075478085i[FDD  ] attempt to read/write sector 19 past last sector 18
+00080110845i[FDD  ] attempt to read/write sector 19 past last sector 18
+00084743609i[FDD  ] attempt to read/write sector 19 past last sector 18
+00089376369i[FDD  ] attempt to read/write sector 19 past last sector 18
+00094009133i[FDD  ] attempt to read/write sector 19 past last sector 18
+00098641904i[FDD  ] attempt to read/write sector 19 past last sector 18
+00103274664i[FDD  ] attempt to read/write sector 19 past last sector 18
+00107907461i[FDD  ] attempt to read/write sector 19 past last sector 18
+00112540221i[FDD  ] attempt to read/write sector 19 past last sector 18
+00117172985i[FDD  ] attempt to read/write sector 19 past last sector 18
+00121805745i[FDD  ] attempt to read/write sector 19 past last sector 18
+00126438509i[FDD  ] attempt to read/write sector 19 past last sector 18
+00131071280i[FDD  ] attempt to read/write sector 19 past last sector 18
+00135704044i[FDD  ] attempt to read/write sector 19 past last sector 18
+00140336815i[FDD  ] attempt to read/write sector 19 past last sector 18
+00144969575i[FDD  ] attempt to read/write sector 19 past last sector 18
+00149602339i[FDD  ] attempt to read/write sector 19 past last sector 18
+00154235099i[FDD  ] attempt to read/write sector 19 past last sector 18
+00158867863i[FDD  ] attempt to read/write sector 19 past last sector 18
+00163500623i[FDD  ] attempt to read/write sector 19 past last sector 18
+00168133387i[FDD  ] attempt to read/write sector 19 past last sector 18
+00172766158i[FDD  ] attempt to read/write sector 19 past last sector 18
+00177398918i[FDD  ] attempt to read/write sector 19 past last sector 18
+00182031693i[FDD  ] attempt to read/write sector 19 past last sector 18
+00186664453i[FDD  ] attempt to read/write sector 19 past last sector 18
+00191297217i[FDD  ] attempt to read/write sector 19 past last sector 18
+00195929977i[FDD  ] attempt to read/write sector 19 past last sector 18
+00200562741i[FDD  ] attempt to read/write sector 19 past last sector 18
+00205195512i[FDD  ] attempt to read/write sector 19 past last sector 18
+00209828272i[FDD  ] attempt to read/write sector 19 past last sector 18
+00214461069i[FDD  ] attempt to read/write sector 19 past last sector 18
+00219093829i[FDD  ] attempt to read/write sector 19 past last sector 18
+00223726593i[FDD  ] attempt to read/write sector 19 past last sector 18
+00228359353i[FDD  ] attempt to read/write sector 19 past last sector 18
+00232992117i[FDD  ] attempt to read/write sector 19 past last sector 18
+00237624888i[FDD  ] attempt to read/write sector 19 past last sector 18
+00242257652i[FDD  ] attempt to read/write sector 19 past last sector 18
+00246890423i[FDD  ] attempt to read/write sector 19 past last sector 18
+00251523183i[FDD  ] attempt to read/write sector 19 past last sector 18
+00256155947i[FDD  ] attempt to read/write sector 19 past last sector 18
+00260788707i[FDD  ] attempt to read/write sector 19 past last sector 18
+00265421471i[FDD  ] attempt to read/write sector 19 past last sector 18
+00270054231i[FDD  ] attempt to read/write sector 19 past last sector 18
+00274686995i[FDD  ] attempt to read/write sector 19 past last sector 18
+00279319766i[FDD  ] attempt to read/write sector 19 past last sector 18
+00283952526i[FDD  ] attempt to read/write sector 19 past last sector 18
+00288585301i[FDD  ] attempt to read/write sector 19 past last sector 18
+00293218061i[FDD  ] attempt to read/write sector 19 past last sector 18
+00297850825i[FDD  ] attempt to read/write sector 19 past last sector 18
+00302483585i[FDD  ] attempt to read/write sector 19 past last sector 18
+00307116349i[FDD  ] attempt to read/write sector 19 past last sector 18
+00311749120i[FDD  ] attempt to read/write sector 19 past last sector 18
+00316381880i[FDD  ] attempt to read/write sector 19 past last sector 18
+00321014677i[FDD  ] attempt to read/write sector 19 past last sector 18
+00325647437i[FDD  ] attempt to read/write sector 19 past last sector 18
+00330280201i[FDD  ] attempt to read/write sector 19 past last sector 18
+00334912961i[FDD  ] attempt to read/write sector 19 past last sector 18
+00339545725i[FDD  ] attempt to read/write sector 19 past last sector 18
+00344178496i[FDD  ] attempt to read/write sector 19 past last sector 18
+00348811260i[FDD  ] attempt to read/write sector 19 past last sector 18
+00353444031i[FDD  ] attempt to read/write sector 19 past last sector 18
+00358076791i[FDD  ] attempt to read/write sector 19 past last sector 18
+00362709555i[FDD  ] attempt to read/write sector 19 past last sector 18
+00367342315i[FDD  ] attempt to read/write sector 19 past last sector 18
+00371975079i[FDD  ] attempt to read/write sector 19 past last sector 18
+00376607839i[FDD  ] attempt to read/write sector 19 past last sector 18
+00381240603i[FDD  ] attempt to read/write sector 19 past last sector 18
+00385873374i[FDD  ] attempt to read/write sector 19 past last sector 18
+00390506134i[FDD  ] attempt to read/write sector 19 past last sector 18
+00395138909i[FDD  ] attempt to read/write sector 19 past last sector 18
+00399771669i[FDD  ] attempt to read/write sector 19 past last sector 18
+00404404433i[FDD  ] attempt to read/write sector 19 past last sector 18
+00409037193i[FDD  ] attempt to read/write sector 19 past last sector 18
+00413669957i[FDD  ] attempt to read/write sector 19 past last sector 18
+00418302728i[FDD  ] attempt to read/write sector 19 past last sector 18
+00422935488i[FDD  ] attempt to read/write sector 19 past last sector 18
+00427568285i[FDD  ] attempt to read/write sector 19 past last sector 18
+00432201045i[FDD  ] attempt to read/write sector 19 past last sector 18
+00436833809i[FDD  ] attempt to read/write sector 19 past last sector 18
+00441466569i[FDD  ] attempt to read/write sector 19 past last sector 18
+00446099333i[FDD  ] attempt to read/write sector 19 past last sector 18
+00450732104i[FDD  ] attempt to read/write sector 19 past last sector 18
+00455364868i[FDD  ] attempt to read/write sector 19 past last sector 18
+00459997639i[FDD  ] attempt to read/write sector 19 past last sector 18
+00464630399i[FDD  ] attempt to read/write sector 19 past last sector 18
+00469263163i[FDD  ] attempt to read/write sector 19 past last sector 18
+00473895923i[FDD  ] attempt to read/write sector 19 past last sector 18
+00478528687i[FDD  ] attempt to read/write sector 19 past last sector 18
+00483161447i[FDD  ] attempt to read/write sector 19 past last sector 18
+00487794211i[FDD  ] attempt to read/write sector 19 past last sector 18
+00492426982i[FDD  ] attempt to read/write sector 19 past last sector 18
+00497059742i[FDD  ] attempt to read/write sector 19 past last sector 18
+00501692517i[FDD  ] attempt to read/write sector 19 past last sector 18
+00506325277i[FDD  ] attempt to read/write sector 19 past last sector 18
+00510958041i[FDD  ] attempt to read/write sector 19 past last sector 18
+00515590801i[FDD  ] attempt to read/write sector 19 past last sector 18
+00520223565i[FDD  ] attempt to read/write sector 19 past last sector 18
+00524856336i[FDD  ] attempt to read/write sector 19 past last sector 18
+00529489096i[FDD  ] attempt to read/write sector 19 past last sector 18
+00534121893i[FDD  ] attempt to read/write sector 19 past last sector 18
+00538754653i[FDD  ] attempt to read/write sector 19 past last sector 18
+00543387417i[FDD  ] attempt to read/write sector 19 past last sector 18
+00548020177i[FDD  ] attempt to read/write sector 19 past last sector 18
+00552652941i[FDD  ] attempt to read/write sector 19 past last sector 18
+00557285712i[FDD  ] attempt to read/write sector 19 past last sector 18
+00561918476i[FDD  ] attempt to read/write sector 19 past last sector 18
+00564870000p[SDL  ] >>PANIC<< User requested shutdown.
+00564870000i[CPU0 ] CPU is in real mode (active)
+00564870000i[CPU0 ] CS.mode = 16 bit
+00564870000i[CPU0 ] SS.mode = 16 bit
+00564870000i[CPU0 ] EFER   = 0x00000000
+00564870000i[CPU0 ] | EAX=00001648  EBX=00001606  ECX=00090200  EDX=00000000
+00564870000i[CPU0 ] | ESP=0000cbb6  EBP=0000ffbe  ESI=000e1647  EDI=0000001e
+00564870000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf ZF af PF cf
+00564870000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
+00564870000i[CPU0 ] |  CS:1000( 0004| 0|  0) 00010000 0000ffff 0 0
+00564870000i[CPU0 ] |  DS:1000( 0005| 0|  0) 00010000 0000ffff 0 0
+00564870000i[CPU0 ] |  SS:1000( 0005| 0|  0) 00010000 0000ffff 0 0
+00564870000i[CPU0 ] |  ES:1000( 0005| 0|  0) 00010000 0000ffff 0 0
+00564870000i[CPU0 ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+00564870000i[CPU0 ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+00564870000i[CPU0 ] | EIP=00000493 (00000493)
+00564870000i[CPU0 ] | CR0=0x60000010 CR2=0x00000000
+00564870000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
+00564870000i[CMOS ] Last time is 1430335833 (Wed Apr 29 22:30:33 2015)
+00564870000i[CTRL ] quit_sim called with exit code 1
