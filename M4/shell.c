@@ -42,7 +42,7 @@ void handleCommand(char* input) {
 	 interrupt(0x21, 3, fileName1, buffer, 0);
 	 interrupt(0x21, 0, buffer, 0, 0);
 	}
-	
+	if(checkEqual == 0){
 	  checkEqual = 1;
 	  i = 0;
       while(i<7){		//check if equal "execute"
@@ -63,7 +63,8 @@ void handleCommand(char* input) {
 	  interrupt(0x21, 4, programName, 0x2000, 0);
 	  //interrupt(0x21, 5, 0, 0, 0);
 	}
-	 
+	}
+	if(checkEqual == 0){
 	 checkEqual = 1;
 	 i = 0;
       while(i<6){      //check if equal "delete"
@@ -85,6 +86,7 @@ void handleCommand(char* input) {
 	 interrupt(0x21, 7, fileName1, 0, 0);
 		
 	}
+	}if(checkEqual == 0){
 	    checkEqual = 1;
 	    i = 0;
       while(i<4){      //check if equal "copy"
@@ -115,8 +117,8 @@ void handleCommand(char* input) {
 	interrupt(0x21, 3, fileName1, buffer, 0);
 	interrupt(0x21, 8, fileName2, buffer, 1);
 		
-	}
-	
+	}}
+	if(checkEqual == 0){
 	checkEqual = 1;
 	i = 0;
 	
@@ -130,7 +132,7 @@ void handleCommand(char* input) {
 	if(checkEqual == 1){		//if equal "dir"
 	  
 	}
-	
+	}if(checkEqual == 0){
 	checkEqual = 1;
 	i = 0;
 	
@@ -144,9 +146,10 @@ void handleCommand(char* input) {
 	if(checkEqual == 1){		//if equal "create"
 	  
 	}
-	
-	if(checkEqual == 0){		//bad command if not equal both
+	}
+	if(checkEqual == 0){		//bad command if not equal any command
 	  interrupt(0x21, 0, "Bad Command: ", 0, 0);
 	  interrupt(0x21, 0, input, 0 ,0);
 	  interrupt(0x21, 0, "", 0, 0);
+	}
 }

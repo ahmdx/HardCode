@@ -17,6 +17,9 @@ void writeFile(char* name, char* buffer, int secNum);
 // AX = AH*256+AL
 
 int main() {
+  int i=0;
+    char buffer1[13312];
+    char buffer2[13312];
   // char line[80]; // TASK 2
   // char buffer[512]; // TASK 3
   // printString("Hello World"); //TASK 1
@@ -42,16 +45,14 @@ int main() {
   // interrupt(0x21, 4, "tstprg", 0x2000, 0); // STEP 2 & 3
   // interrupt(0x21, 5, 0, 0, 0); // STEP 3
   // interrupt(0x21, 4, "shell", 0x2000, 0); //STEP 4 & 5
-  /* 
-   interrupt(0x21, 7, "messag", 0, 0); //delete messag
-   interrupt(0x21, 3, "messag", buffer, 0); // try to read messag
-   interrupt(0x21, 0, buffer, 0, 0); //print out the contents of buffer */
-    int i=0;
-    char buffer1[13312];
-    char buffer2[13312];
-    buffer2[0]=’h’; buffer2[1]=’e’; buffer2[2]=’l’; buffer2[3]=’l’;
-    buffer2[4]=’o’;
-    for(i=5; i<13312; i++) buffer2[i]=0x0;
+  
+  // interrupt(0x21, 7, "messag", 0, 0); //delete messag
+  // interrupt(0x21, 3, "messag", buffer, 0); // try to read messag
+   //interrupt(0x21, 0, buffer, 0, 0); //print out the contents of buffer 
+    
+    buffer2[0]="h"; buffer2[1]="e"; buffer2[2]="l"; buffer2[3]="l";
+    buffer2[4]="o";
+    for(i=5; i<13312; i++) buffer2[i] = 0x00;
     makeInterrupt21();
     interrupt(0x21,8, "testW\0", buffer2, 1); //write file testW
     interrupt(0x21,3, "testW\0", buffer1, 0); //read file testW
@@ -289,50 +290,51 @@ void writeFile(char* name, char* buffer, int secNum){
   int startDirec = 0;
   int sectorNum = 0;
   int nameLength = strlen(name);
-  int remainbytes = 6-name;
+  int remainbytes = 6-nameLength;
+  int mapCount = 0;
+  int bufferCount = 0;
+  char writeBuffer[512];
   readSector(map,1);
   readSector(directory,2);
   while(directory[startDirec] != 0){ //find the first free directory entry
     startDirec++;
   }
+  
   startDirec++;
-  while(store < 6){ //write the file name in the first 6 bytes
+  
+   
       
-      while(store < nameLength){
+      while(store < nameLength){	//write the file name in the first 6 bytes
+	directory[startDirec] = name[store]; 
+	store++;
+	startDirec++;
 	if((512-startDirec)<= 0){
 	 printString("error: no more space");
-	 return
+	 return;
 	}
-      
-      directory[startDirec] = name[store]; 
-      store++;
-      startDirec++;
       }
       while(remainbytes > 0){ //fill the remaining bytes with 0x00
-      if((512-startDirec)<= 0){
+	directory[startDirec] = 0x00;
+	startDirec++;
+	if((512-startDirec)<= 0){
 	 printString("error: no more space");
-	 return
+	 return;
       }
-      directory[startDirec] = 0x00;
-      startDirec++;
     }   
-  }
-  while(map[sectorNum] != 0){ //find the first free sector in the map
+  
+  while(map[sectorNum] != 0){  //find the first free sector in the map
      if((512-sectorNum)<= 0){
 	 printString("error: no more space");
-	 return
+	 return;
       }
     sectorNum++; 
   }
   sectorNum++;
-  int mapCount = 0;
-  int bufferCount = 0;
-  char writeBuffer[512];
-    while(mapCount < 26){ //write the number of 26 sector in the map in the directory 
+    while(mapCount < strlen(buffer)){ //write the number of 26 sector in the map in the directory 
 	int count = 0;
 	 if((512-startDirec)<= 0 || (512-sectorNum) <= 0){
 	 printString("error: no more space");
-	 return
+	 return;
       }
 	map[sectorNum] = 0xFF;
 	directory[startDirec] = sectorNum;
@@ -346,7 +348,7 @@ void writeFile(char* name, char* buffer, int secNum){
 	sectorNum++;
 	mapCount++;
     }
-    while(startDirec < 512){ // Fill in the remaining bytes in the directory entry to 0x00.
+   while(startDirec < 26){ // Fill in the remaining bytes in the directory entry to 0x00.
       directory[startDirec] = 0;
       startDirec++;
     }
