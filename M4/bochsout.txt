@@ -33,37 +33,37 @@
 00000000000i[     ]   SB16 support: yes
 00000000000i[     ]   USB support: yes
 00000000000i[     ]   VGA extension support: vbe cirrus
-00000000000i[MEM0 ] allocated memory at 0x7fe158b6a010. after alignment, vector=0x7fe158b6b000
+00000000000i[MEM0 ] allocated memory at 0x7f1648963010. after alignment, vector=0x7f1648964000
 00000000000i[MEM0 ] 32.00MB
 00000000000i[MEM0 ] mem block size = 0x00100000, blocks=32
 00000000000i[MEM0 ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
-00000000000i[     ] lt_dlhandle is 0x2bd7d30
+00000000000i[     ] lt_dlhandle is 0x2f08d60
 00000000000i[PLGIN] loaded plugin libbx_hdimage.so
-00000000000i[     ] lt_dlhandle is 0x2bd86a0
+00000000000i[     ] lt_dlhandle is 0x2f096d0
 00000000000i[PLGIN] loaded plugin libbx_pci.so
-00000000000i[     ] lt_dlhandle is 0x2bd9250
+00000000000i[     ] lt_dlhandle is 0x2f0a280
 00000000000i[PLGIN] loaded plugin libbx_pci2isa.so
-00000000000i[     ] lt_dlhandle is 0x2bd9c40
+00000000000i[     ] lt_dlhandle is 0x2f0ac70
 00000000000i[PLGIN] loaded plugin libbx_acpi.so
-00000000000i[     ] lt_dlhandle is 0x2bda680
+00000000000i[     ] lt_dlhandle is 0x2f0b6b0
 00000000000i[PLGIN] loaded plugin libbx_cmos.so
-00000000000i[     ] lt_dlhandle is 0x2bdafc0
+00000000000i[     ] lt_dlhandle is 0x2f0bff0
 00000000000i[PLGIN] loaded plugin libbx_dma.so
-00000000000i[     ] lt_dlhandle is 0x2bdba50
+00000000000i[     ] lt_dlhandle is 0x2f0ca80
 00000000000i[PLGIN] loaded plugin libbx_pic.so
-00000000000i[     ] lt_dlhandle is 0x2bdc2f0
+00000000000i[     ] lt_dlhandle is 0x2f0d320
 00000000000i[PLGIN] loaded plugin libbx_pit.so
-00000000000i[     ] lt_dlhandle is 0x2bdcd20
+00000000000i[     ] lt_dlhandle is 0x2f0dd50
 00000000000i[PLGIN] loaded plugin libbx_floppy.so
-00000000000i[     ] lt_dlhandle is 0x2bdd910
+00000000000i[     ] lt_dlhandle is 0x2f0e940
 00000000000i[PLGIN] loaded plugin libbx_vga.so
-00000000000i[     ] lt_dlhandle is 0x2bde0a0
+00000000000i[     ] lt_dlhandle is 0x2f0f0d0
 00000000000i[PLGIN] loaded plugin libbx_ioapic.so
-00000000000i[     ] lt_dlhandle is 0x2bdeae0
+00000000000i[     ] lt_dlhandle is 0x2f0fb10
 00000000000i[PLGIN] loaded plugin libbx_keyboard.so
-00000000000i[     ] lt_dlhandle is 0x2bdf380
+00000000000i[     ] lt_dlhandle is 0x2f103b0
 00000000000i[PLGIN] loaded plugin libbx_harddrv.so
-00000000000i[     ] lt_dlhandle is 0x2bf1470
+00000000000i[     ] lt_dlhandle is 0x2f224a0
 00000000000i[PLGIN] loaded plugin libbx_pci_ide.so
 00000000000i[PLGIN] init_dev of 'pci' plugin device by virtual method
 00000000000i[PCI  ] 440FX Host bridge present at device 0, function 0
@@ -71,7 +71,7 @@
 00000000000i[PCI  ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS ] Using local time for initial clock
-00000000000i[CMOS ] Setting initial clock to: Fri Apr 17 22:27:29 2015 (time0=1429302449)
+00000000000i[CMOS ] Setting initial clock to: Wed Apr 29 12:53:36 2015 (time0=1430304816)
 00000000000i[PLGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA  ] channel 4 used by cascade
 00000000000i[PLGIN] init_dev of 'pic' plugin device by virtual method
@@ -210,23 +210,23 @@
 00001594488i[BXVGA] VBE known Display Interface b0c5
 00001597413i[VBIOS] VBE Bios $Id: vbe.c,v 1.64 2011/07/19 18:25:05 vruppert Exp $
 00032315171i[BIOS ] Booting from 0000:7c00
-00184170000p[SDL  ] >>PANIC<< User requested shutdown.
-00184170000i[CPU0 ] CPU is in real mode (active)
-00184170000i[CPU0 ] CS.mode = 16 bit
-00184170000i[CPU0 ] SS.mode = 16 bit
-00184170000i[CPU0 ] EFER   = 0x00000000
-00184170000i[CPU0 ] | EAX=00000000  EBX=0000cbea  ECX=00090000  EDX=00000000
-00184170000i[CPU0 ] | ESP=0000cbea  EBP=0000ffee  ESI=000e06e6  EDI=0000ffac
-00184170000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf SF zf af pf cf
-00184170000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
-00184170000i[CPU0 ] |  CS:1000( 0004| 0|  0) 00010000 0000ffff 0 0
-00184170000i[CPU0 ] |  DS:1000( 0005| 0|  0) 00010000 0000ffff 0 0
-00184170000i[CPU0 ] |  SS:1000( 0005| 0|  0) 00010000 0000ffff 0 0
-00184170000i[CPU0 ] |  ES:1000( 0005| 0|  0) 00010000 0000ffff 0 0
-00184170000i[CPU0 ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-00184170000i[CPU0 ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-00184170000i[CPU0 ] | EIP=00000056 (00000056)
-00184170000i[CPU0 ] | CR0=0x60000010 CR2=0x00000000
-00184170000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
-00184170000i[CMOS ] Last time is 1429302467 (Fri Apr 17 22:27:47 2015)
-00184170000i[CTRL ] quit_sim called with exit code 1
+00398840000p[SDL  ] >>PANIC<< User requested shutdown.
+00398840000i[CPU0 ] CPU is in real mode (active)
+00398840000i[CPU0 ] CS.mode = 16 bit
+00398840000i[CPU0 ] SS.mode = 16 bit
+00398840000i[CPU0 ] EFER   = 0x00000000
+00398840000i[CPU0 ] | EAX=00000000  EBX=0000cbea  ECX=00090000  EDX=00000000
+00398840000i[CPU0 ] | ESP=0000cbea  EBP=0000ffee  ESI=000e06e6  EDI=0000ffac
+00398840000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf SF zf af pf cf
+00398840000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
+00398840000i[CPU0 ] |  CS:1000( 0004| 0|  0) 00010000 0000ffff 0 0
+00398840000i[CPU0 ] |  DS:1000( 0005| 0|  0) 00010000 0000ffff 0 0
+00398840000i[CPU0 ] |  SS:1000( 0005| 0|  0) 00010000 0000ffff 0 0
+00398840000i[CPU0 ] |  ES:1000( 0005| 0|  0) 00010000 0000ffff 0 0
+00398840000i[CPU0 ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+00398840000i[CPU0 ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+00398840000i[CPU0 ] | EIP=00000056 (00000056)
+00398840000i[CPU0 ] | CR0=0x60000010 CR2=0x00000000
+00398840000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
+00398840000i[CMOS ] Last time is 1430304855 (Wed Apr 29 12:54:15 2015)
+00398840000i[CTRL ] quit_sim called with exit code 1
