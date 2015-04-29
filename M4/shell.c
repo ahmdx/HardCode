@@ -56,14 +56,14 @@ void handleCommand(char* input) {
 		  }
 		  dirEntry++;
 		}
-		dirEntry = 6;
-		while(dirEntry < 32) {
-		  if (directory[dirIndex*32 + dirEntry] == 0x00) {
-			break;
-		  }
-		  dirSector++;
-		  dirEntry++;
-		}
+// 		dirEntry = 6;
+// 		while(dirEntry < 32) {
+// 		  if (directory[dirIndex*32 + dirEntry] == 0x00) {
+// 			break;
+// 		  }
+// 		  dirSector++;
+// 		  dirEntry++;
+// 		}
 // 		interrupt(0x21, 0, 2 + '0', 0, 0);
 		dirEntry = 6;
 		dirName[dirEntry + 0] = 1 + '0';
