@@ -15,6 +15,9 @@ void deleteFile(char*);
 void writeFile(char* name, char* buffer, int secNum);
 int length(char* array);
 void copy(char*);
+void dir();
+void create(char*);
+void delete(char*);
 // interrupt(I_NUM, AX, BX, CX, DX)
 // AX = AH*256+AL
 
@@ -169,6 +172,12 @@ void handleInterrupt21(int ax, int bx, int cx, int dx){
       writeFile(bx, cx, dx);break;
     case 9:
       copy(bx);break;
+    case 10:
+      dir();break;
+    case 11:
+      create(bx);break;
+    case 12:
+      delete(bx);break;
     default:
       printString("Fatal: Invalid AX value");
   }
@@ -366,9 +375,15 @@ void copy(char* input){
   int cc =0;
   int j = 0;
   char filename1[7];
+  char* filenam2;
   int copycheck = 0;
   char copyBuffer[13312];
   
+  while(input[j] != 0x0D && input[j] != "\0"){
+    j++;
+  }
+  input[j] = 0x00;
+  input[++j] = 0x00;
   while(c<7){
     if(input[c+5] == 0x20){
       break;
@@ -376,16 +391,14 @@ void copy(char* input){
     filename1[c] = input[c+5];
     c++;
   }
-  //filename1[c] = "\0";
+  filename1[c] = "\0";
   readFile(filename1,copyBuffer);
+  c++;
   if(c < 6){
     c++;
   }
   
-//   while(j<7){
-//     filename1[j] = "0x00";
-//     j++;
-//   }
+  
   while(cc<7){
     if(input[c+5] == "\0"){
       break;
@@ -395,11 +408,103 @@ void copy(char* input){
     cc++;
     c++;
   }
-  //filename1[cc] = "\0";
-  
+  filename1[cc] = "\0";
   //printString(copyBuffer);
   writeFile(filename1,copyBuffer,0);
-  printString(input);
-   printString(filename1);
+  //printString(input);
+  // printString(filename1);
    //printString(filename2);
+}
+
+void dir(){
+    char directory[512];
+    char dirName[32];
+    char secNum[2];
+    int dirIndex = 0;
+    int dirEntry = 0;
+    int dirSector = 1;
+  	interrupt(0x21, 2, directory, 2, 0);
+  	while (dirIndex < 16) {
+  	  if (directory[dirIndex*32] != 0x00) {
+  		dirEntry = 0;
+  		while(dirEntry < 6) {
+  		  if (directory[dirIndex*32 + dirEntry] != 0x00) {
+  			dirName[dirEntry] = directory[dirIndex*32 + dirEntry];
+  		  } else {
+  			dirName[dirEntry] = 0x5F;
+  		  }
+  		  dirEntry++;
+  		}
+  		dirEntry = 6;
+  		while(dirEntry < 32) {
+  		  if (directory[dirIndex*32 + dirEntry] == 0x00) {
+  			break;
+  		  }
+  		  dirSector++;
+  		  dirEntry++;
+  		}
+  		dirEntry = 6;
+  		dirName[dirEntry++] = 0x20;
+  		if (dirSector < 10) {
+  		  dirName[dirEntry++] = dirSector + '0';
+  		} else {
+  		  secNum[1] = mod(dirSector, 10) + '0';
+  		  dirSector = div(dirSector, 10);
+  		  secNum[0] = mod(dirSector, 10) + '0';
+  		  dirName[dirEntry++] = secNum[0];
+  		  dirName[dirEntry++] = secNum[1];
+  		}
+  		dirName[dirEntry++] = '\r';
+  		dirName[dirEntry++] = '\n';
+  		dirName[dirEntry++] = 0x00;
+  		interrupt(0x21, 0, dirName, 0, 0);
+  		dirSector = 0;
+  	  }
+  	  dirIndex++;
+  	}
+}
+
+void create(char* input){
+    int dirIndex = 0;
+    char fileName[32];
+    char lineRead[100];
+    char file[13312];
+    int dirEntry = 0;
+    int j = 0;
+
+  	while(input[dirIndex + 7] != '\0') {
+  	  fileName[dirIndex] = input[dirIndex + 7];
+  	  dirIndex++;
+  	}
+  	interrupt(0x21, 0, "create> ",0, 0);
+  	interrupt(0x21, 1, lineRead, 0, 0);
+  	while(lineRead[0] != 0xd) {
+  	  dirIndex = 0;
+  	  while(lineRead[dirIndex] != '\0') {
+  		file[dirEntry] = lineRead[dirIndex];
+  		dirIndex++;
+  		dirEntry++;
+  	  }
+  	  while(fileName[j] != 0xd){
+	    j++;
+	  }
+	  fileName[j] = 0x00;
+	  fileName[++j] = 0x00;
+  	  interrupt(0x21, 0, "create> ",0, 0);
+  	  interrupt(0x21, 1, lineRead, 0, 0);
+  	}
+  	interrupt(0x21, 8, fileName, file, 1);
+}
+void delete(char* input){
+  char* deleteFileName;
+  int d = 0;
+  while(d<6){
+    if(input[d+7] == "\0"){
+      break;
+    }
+    deleteFileName[d] = input[d+7];
+    d++;
+  }
+  interrupt(0x21,7,deleteFileName,0,0);
+  
 }

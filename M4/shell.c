@@ -36,8 +36,8 @@ void handleCommand(char* input) {
   int v = 0;
   char* execProgramName;
   int e = 0;
-  char* deleteFileName;
-  int d = 0;
+//   char* deleteFileName;
+//   int d = 0;
 
   if (input[0] == 'v' && input[1] == 'i' && input[2] == 'e' && input[3] == 'w') {
 	while(v<6){
@@ -61,77 +61,16 @@ void handleCommand(char* input) {
 	interrupt(0x21, 4, execProgramName, 0x2000, 0);
   }else
   if (input[0] == 'd' && input[1] == 'e' && input[2] == 'l' && input[3] == 'e' && input[4] == 't' && input[5] == 'e') {
-	while(d<6){
-	  if(input[d+7] == "\0"){
-		break;
-	  }
-	  deleteFileName[d] = input[d+7];
-	  d++;
-	}
-	interrupt(0x21,7,deleteFileName,0,0);
+    interrupt(0x21,12,input,0,0);
   }else
   if (input[0] == 'c' && input[1] == 'o' && input[2] == 'p' && input[3] == 'y') {
 	interrupt(0x21,9,input,0,0);
   }else
   if (input[0] == 'd' && input[1] == 'i' && input[2] == 'r') {
-// 	interrupt(0x21, 2, directory, 2, 0);
-// 	while (dirIndex < 16) {
-// 	  if (directory[dirIndex*32] != 0x00) {
-// 		dirEntry = 0;
-// 		while(dirEntry < 6) {
-// 		  if (directory[dirIndex*32 + dirEntry] != 0x00) {
-// 			dirName[dirEntry] = directory[dirIndex*32 + dirEntry];
-// 		  } else {
-// 			dirName[dirEntry] = 0x5F;
-// 		  }
-// 		  dirEntry++;
-// 		}
-// 		dirEntry = 6;
-// 		while(dirEntry < 32) {
-// 		  if (directory[dirIndex*32 + dirEntry] == 0x00) {
-// 			break;
-// 		  }
-// 		  dirSector++;
-// 		  dirEntry++;
-// 		}
-// 		dirEntry = 6;
-// 		dirName[dirEntry++] = 0x20;
-// 		if (dirSector < 10) {
-// 		  dirName[dirEntry++] = dirSector + '0';
-// 		} else {
-// 		  secNum[1] = mod(dirSector, 10) + '0';
-// 		  dirSector = div(dirSector, 10);
-// 		  secNum[0] = mod(dirSector, 10) + '0';
-// 		  dirName[dirEntry++] = secNum[0];
-// 		  dirName[dirEntry++] = secNum[1];
-// 		}
-// 		dirName[dirEntry++] = '\r';
-// 		dirName[dirEntry++] = '\n';
-// 		dirName[dirEntry++] = 0x00;
-// 		interrupt(0x21, 0, dirName, 0, 0);
-// 		dirSector = 0;
-// 	  }
-// 	  dirIndex++;
-// 	}
+	interrupt(0x21,10,0,0,0);
   }else
   if (input[0] == 'c' && input[1] == 'r' && input[2] == 'e' && input[3] == 'a' && input[4] == 't' && input[5] == 'e') {
-// 	while(input[dirIndex + 7] != '\0') {
-// 	  fileName[dirIndex] = input[dirIndex + 7];
-// 	  dirIndex++;
-// 	}
-// 	interrupt(0x21, 0, "create> ",0, 0);
-// 	interrupt(0x21, 1, lineRead, 0, 0);
-// 	while(lineRead[0] != 0xd) {
-// 	  dirIndex = 0;
-// 	  while(lineRead[dirIndex] != '\0') {
-// 		file[dirEntry] = lineRead[dirIndex];
-// 		dirIndex++;
-// 		dirEntry++;
-// 	  }
-// 	  interrupt(0x21, 0, "create> ",0, 0);
-// 	  interrupt(0x21, 1, lineRead, 0, 0);
-// 	}
-// 	interrupt(0x21, 8, fileName, file, 1);
+    interrupt(0x21,11,input,0,0);
   }
   else {
 	interrupt(0x21, 0, "Fatal: Bad command - ", 0, 0);
